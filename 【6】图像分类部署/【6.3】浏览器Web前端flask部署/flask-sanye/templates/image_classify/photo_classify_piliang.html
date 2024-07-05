@@ -1,0 +1,502 @@
+{% extends "/image_classify/base.html" %}   {#将当前页面继承至base.html母版#}
+{% block content %}
+    <div class="mediabanner">
+        <img src="/img/sanye.png" class="bg" alt=""/>
+        <div class="text">
+            <h3>批量处理</h3>
+            <p>用于实现三叶青块根、叶片图像根据省份的分类;<br>目前产地暂时共分为五大省份：云南省、广西省、浙江省、贵州省、陕西省。
+            </p>
+        </div>
+    </div>
+    <div style="height: 20px"></div>
+
+    <div class="sidebar show-sidebar">
+
+        <div class="card rounded-lg mb-3 relative">
+        </div>
+
+    </div>
+
+    <div style="margin-bottom: 2rem; ">
+        <div class="border-xiaowo"></div>
+        <p style="font-size: 3.0rem; text-align: center;align-content: center;color: #382d62;">
+            块根识别</p>
+        <div style="float:left;" class="img_zhanshi">
+            <a href="javascript:;" class="file" style="background-color: #fff3cd;cursor:pointer;">选择文件
+                <input type="file" name="file" id="fileInput" multiple><br>
+            </a>
+            <!-- 轮播图 -->
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-indicators" id="carouselIndicators">
+                    <!-- 这里将通过 JavaScript 动态添加指示器 -->
+                </div>
+                <div class="carousel-inner" id="carouselInner" style="margin-top:20px;">
+                    <!-- 这里将通过 JavaScript 动态添加轮播项 -->
+                    <div class="carousel-item active">
+                        <img src="" alt="">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">上一张</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">下一张</span>
+                </button>
+            </div>
+        </div>
+        <div class="font_predict" style="float:left;margin-left:5rem;margin-right: 12rem">
+            <input type="button" id="b0" onclick="test_pili()" value="预测">
+            <pre id="out"></pre>
+        </div>
+    </div>
+    <div class="card rounded-lg relative submit_div" style="display: none;">
+        <div class="card-body">三叶青块根识别
+            <button type="submit" id="submit"
+                    class="btn btn-danger custom_btn-d text-sm col-12 custom-submit"
+                    onclick="submit_photos_model_batch()"><i
+                    class="mr-2"></i>批量提交结果
+            </button>
+        </div>
+
+        <div style="height: 20px"></div>
+    </div>
+    <div style="clear:both"></div> <!-- 添加这行来清除浮动 -->
+    <div style="margin-bottom: 2rem">
+        <p style="font-size: 3.0rem; text-align:center;align-content:center;color: #382d62">
+            叶片识别</p>
+        <div class="border-xiaowo"></div>
+
+        <div style="float:left;" class="img_zhanshi">
+            <a href="javascript:;" class="file" style="background-color: #fff3cd;cursor:pointer;">选择文件
+                <input type="file" name="file" id="fileInput_ye" multiple><br>
+            </a>
+            <!-- 轮播图 -->
+            <div id="carouselExampleIndicators_ye" class="carousel slide">
+                <div class="carousel-indicators" id="carouselIndicators_ye">
+                    <!-- 这里将通过 JavaScript 动态添加指示器 -->
+                </div>
+                <div class="carousel-inner" id="carouselInner_ye" style="margin-top:20px;">
+                    <!-- 这里将通过 JavaScript 动态添加轮播项 -->
+                    <div class="carousel-item active">
+                        <img src="" alt="">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators_ye"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">上一张</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators_ye"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">下一张</span>
+                </button>
+            </div>
+        </div>
+        <div class="font_predict" style="float:left;margin-left:5rem;margin-right: 12rem">
+            <input type="button" id="b0" onclick="test_1()" value="预测">
+            <pre id="out1"></pre>
+        </div>
+    </div>
+    <div class="card rounded-lg relative submit_div_ye" style="display: none;">
+        <div class="card-body">三叶青叶片识别
+            <button type="submit" id="submit"
+                    class="btn btn-success custom_btn-d text-sm col-12 custom-submit"
+                    onclick="submit_photos_model_ye_batch()"><i
+                    class="mr-2"></i>批量提交结果
+            </button>
+        </div>
+
+        <div style="height: 20px"></div>
+    </div>
+
+
+
+    <script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="/js/login.js"></script>
+
+    <!-- JS -->
+    <script src="/home/js/script.js"></script>
+    <script>
+        function submit_photos_model_batch() {
+            createDynamicList();  // 在打开模态框之前创建动态列表
+            $('#myModal').modal('show');
+        }
+
+        function submit_photos_model_ye_batch() {
+            createDynamicList_ye();  // 在打开模态框之前创建动态列表
+            $('#myModal_ye').modal('show');
+        }
+
+        var selectedFiles = [];
+
+        $('#fileInput').change(function () {
+            var files = this.files;
+            selectedFiles = files;  // 保存文件列表以供后续使用
+            if (files.length > 9) {
+                alert('您只能选择最多9个文件。');
+                this.value = '';  // 清空文件输入
+                return;
+            }
+            var carouselIndicators = $('#carouselIndicators');
+            var carouselInner = $('#carouselInner');
+            carouselIndicators.empty();  // 清空轮播图中的指示器
+            carouselInner.empty();  // 清空轮播图中的内容
+
+            // 使用Promise.all等待所有文件都读取完毕
+            Promise.all(Array.from(files).map((file, i) => {
+                return new Promise((resolve, reject) => {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        resolve({
+                            order: i,
+                            result: e.target.result
+                        });
+                    };
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
+                });
+            })).then(results => {
+                // 按照原始顺序添加图片和指示器到轮播中
+                results.sort((a, b) => a.order - b.order).forEach((result, i) => {
+                    var activeClassIndicator = i === 0 ? ' class="active"' : '';
+                    var indicatorHtml = '<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="' + i + '"' + activeClassIndicator + ' aria-label="Slide ' + (i + 1) + '"></button>';
+                    carouselIndicators.append(indicatorHtml);
+
+                    var activeClassItem = i === 0 ? ' active' : '';
+                    var itemHtml = '<div class="carousel-item' + activeClassItem + `"><img id="${i}_img_gen" src="` + result.result + '" ></div>';
+                    carouselInner.append(itemHtml);
+
+                });
+            }).catch(error => {
+                console.error("Error reading files:", error);
+            });
+        });
+
+
+        var selectedFiles_ye = [];
+
+        $('#fileInput_ye').change(function () {
+            var files = this.files;
+            selectedFiles_ye = files;  // 保存文件列表以供后续使用
+            if (files.length > 9) {
+                alert('您只能选择最多9个文件。');
+                this.value = '';  // 清空文件输入
+                return;
+            }
+            var carouselIndicators = $('#carouselIndicators_ye');
+            var carouselInner = $('#carouselInner_ye');
+            carouselIndicators.empty();  // 清空轮播图中的指示器
+            carouselInner.empty();  // 清空轮播图中的内容
+
+            // 使用Promise.all等待所有文件都读取完毕
+            Promise.all(Array.from(files).map((file, i) => {
+                return new Promise((resolve, reject) => {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        resolve({
+                            order: i,
+                            result: e.target.result
+                        });
+                    };
+                    reader.onerror = reject;
+                    reader.readAsDataURL(file);
+                });
+            })).then(results => {
+                // 按照原始顺序添加图片和指示器到轮播中
+                results.sort((a, b) => a.order - b.order).forEach((result, i) => {
+                    var activeClassIndicator = i === 0 ? ' class="active"' : '';
+                    var indicatorHtml = '<button type="button" data-bs-target="#carouselExampleIndicators_ye" data-bs-slide-to="' + i + '"' + activeClassIndicator + ' aria-label="Slide ' + (i + 1) + '"></button>';
+                    carouselIndicators.append(indicatorHtml);
+
+                    var activeClassItem = i === 0 ? ' active' : '';
+
+                    var itemHtml = '<div class="carousel-item' + activeClassItem + `"><img id="${i}_img_ye" src="` + result.result + '" ></div>';
+
+                    carouselInner.append(itemHtml);
+                });
+            }).catch(error => {
+                console.error("Error reading files:", error);
+            });
+        });
+
+
+        // 创建一个数组来保存每个文件的预测结果
+        var results = [];
+        // 创建一个数组来保存每个文件的名称
+        var photo_names = [];
+
+        function test_pili() {
+            var out = '';
+            var flower = '<table style="width:100%; text-align:center;"><tr><th>序号</th><th>Top 1</th><th>Top 2</th><th>Top 3</th></tr>';
+            for (var i = 0; i < selectedFiles.length; i++) {
+                var fileobj = selectedFiles[i];
+                // 将文件名添加到photo_names数组中
+                photo_names.push(fileobj.name);
+                var form = new FormData();
+                form.append("file", fileobj);
+                $.ajax({
+                    type: 'POST',
+                    url: "/predict",
+                    data: form,
+                    async: false,       //同步执行
+                    processData: false, // 告诉jquery要传输data对象
+                    contentType: false, //告诉jquery不需要增加请求头对于contentType的设置
+                    success: function (arg) {
+                        console.log(arg)
+                        out = arg.result;
+                        // 将预测结果添加到results数组中
+                        results.push(out);
+                    }, error: function () {
+                        console.log("后台处理错误");
+                    }
+                });
+
+                // 对结果进行排序，得到置信度最高的前三个
+                var top3 = out.sort((a, b) => {
+                    var aConfidence = parseFloat(a.split('置信度:')[1]);  // 提取a的置信度
+                    var bConfidence = parseFloat(b.split('置信度:')[1]);  // 提取b的置信度
+                    return bConfidence - aConfidence;
+                }).slice(0, 3);
+
+                var top3Str = top3.map(e => {
+                    let parts = e.split('置信度:');
+                    let category = parts[0].split(':')[1].trim();  // 提取类别
+                    let confidence = parseFloat(parts[1]);  // 提取置信度
+                    return `类别${category}, 置信度${confidence}`;
+                });
+
+
+                flower += `<tr><td>图片${i + 1}</td><td>${top3Str[0]}</td><td>${top3Str[1]}</td><td>${top3Str[2]}</td></tr>`;
+            }
+
+            // 在所有文件都处理完之后
+            results.forEach((result, i) => {
+                var top1 = result.sort((a, b) => {
+                    var aConfidence = parseFloat(a.split('置信度:')[1]);  // 提取a的置信度
+                    var bConfidence = parseFloat(b.split('置信度:')[1]);  // 提取b的置信度
+                    return bConfidence - aConfidence;
+                }).slice(0, 1);
+                var history = JSON.parse(localStorage.getItem('recognitionHistory')) || [];
+                history.push({
+                    type: '批量-块根识别', // 操作类别
+                    imageUrl: $(`#${i}_img_gen`).attr("src"), // 使用文件的DataURL
+                    result: top1, // 存储预测结果
+                    time: new Date().toISOString(),
+                });
+                localStorage.setItem('recognitionHistory', JSON.stringify(history));
+            });
+
+            flower += '</table>'
+            document.getElementById("out").innerHTML = flower;
+
+            // 当预测结束并得到结果后
+            var elements = document.getElementsByClassName('submit_div');
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].style.display = 'block';
+            }
+        }
+
+
+        // 创建一个数组来保存每个文件的预测结果
+        var results_ye = [];
+        // 创建一个数组来保存每个文件的名称
+        var photo_names_ye = [];
+
+        function test_1() {
+            var out = '';
+            var flower = '<table style="width:100%; text-align:center;"><tr><th>序号</th><th>Top 1</th><th>Top 2</th><th>Top 3</th></tr>';
+            for (var i = 0; i < selectedFiles_ye.length; i++) {
+                var fileobj = selectedFiles_ye[i];
+                // 将文件名添加到photo_names数组中
+                photo_names_ye.push(fileobj.name);
+                var form = new FormData();
+                form.append("file", fileobj);
+                $.ajax({
+                    type: 'POST',
+                    url: "/predict",
+                    data: form,
+                    async: false,       //同步执行
+                    processData: false, // 告诉jquery要传输data对象
+                    contentType: false, //告诉jquery不需要增加请求头对于contentType的设置
+                    success: function (arg) {
+                        console.log(arg)
+                        out = arg.result;
+                        // 将预测结果添加到results数组中
+                        results_ye.push(out);
+                    }, error: function () {
+                        console.log("后台处理错误");
+                    }
+                });
+
+                // 对结果进行排序，得到置信度最高的前三个
+                var top3 = out.sort((a, b) => {
+                    var aConfidence = parseFloat(a.split('置信度:')[1]);  // 提取a的置信度
+                    var bConfidence = parseFloat(b.split('置信度:')[1]);  // 提取b的置信度
+                    return bConfidence - aConfidence;
+                }).slice(0, 3);
+
+                var top3Str = top3.map(e => {
+                    let parts = e.split('置信度:');
+                    let category = parts[0].split(':')[1].trim();  // 提取类别
+                    let confidence = parseFloat(parts[1]);  // 提取置信度
+                    return `类别${category}, 置信度${confidence}`;
+                });
+
+                flower += `<tr><td>图片${i + 1}</td><td>${top3Str[0]}</td><td>${top3Str[1]}</td><td>${top3Str[2]}</td></tr>`;
+            }
+
+              // 在所有文件都处理完之后
+            results_ye.forEach((result, i) => {
+                var top1 = result.sort((a, b) => {
+                    var aConfidence = parseFloat(a.split('置信度:')[1]);  // 提取a的置信度
+                    var bConfidence = parseFloat(b.split('置信度:')[1]);  // 提取b的置信度
+                    return bConfidence - aConfidence;
+                }).slice(0, 1);
+                var history = JSON.parse(localStorage.getItem('recognitionHistory')) || [];
+                history.push({
+                    type: '批量-叶片识别', // 操作类别
+                    imageUrl: $(`#${i}_img_ye`).attr("src"), // 使用文件的DataURL
+                    result: top1, // 存储预测结果
+                    time: new Date().toISOString(),
+                });
+                localStorage.setItem('recognitionHistory', JSON.stringify(history));
+            });
+
+            flower += '</table>'
+            document.getElementById("out1").innerHTML = flower;
+
+            // 当预测结束并得到结果后
+            var elements = document.getElementsByClassName('submit_div_ye');
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].style.display = 'block';
+            }
+        }
+
+
+    </script>
+
+
+    <style>
+
+        #carouselExampleIndicators {
+            width: 100%;
+            overflow: hidden;
+
+        }
+
+        #carouselExampleIndicators_ye {
+            width: 100%;
+            overflow: hidden;
+
+        }
+
+        .carousel-item img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+        }
+
+        .img_zhanshi img {
+            width: 35rem;
+            height: 30rem;
+        }
+
+
+        .file {
+            position: relative;
+            /*display: inline-block;*/
+            background: #CCC;
+            border: 1px solid #CCC;
+            padding: 4px 4px;
+            overflow: hidden;
+            text-decoration: none;
+            text-indent: 0;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 5px;
+            color: #333;
+            font-size: 13px;
+
+        }
+
+        .file input {
+            position: absolute;
+            font-size: 13px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            border: 1px solid #333;
+            padding: 4px 4px;
+            overflow: hidden;
+            text-indent: 0;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 5px;
+            color: #FFFFFF;
+
+        }
+
+        #b0 {
+            background: #1899FF;
+            border: 1px solid #CCC;
+            padding: 4px 10px;
+            overflow: hidden;
+            text-indent: 0;
+            width: 60px;
+            height: 28px;
+            line-height: 20px;
+            border-radius: 5px;
+            color: #FFFFFF;
+            font-size: 13px;
+        }
+
+        #out {
+            width: 80rex;
+            height: 35rem;
+            line-height: 50px;
+            margin-top: 20px;
+        }
+
+        #out1 {
+            width: 80rex;
+            height: 35rem;
+            line-height: 50px;
+            margin-top: 20px;
+        }
+
+
+        @media (max-width: 700px) {
+            .img_zhanshi img {
+                width: 25rem;
+                height: 25rem;
+            }
+
+            #out {
+                width: 40rex;
+                height: 35rem;
+                line-height: 50px;
+                margin-top: 20px;
+            }
+
+            #out1 {
+                width: 40rex;
+                height: 35rem;
+                line-height: 50px;
+                margin-top: 20px;
+            }
+
+        }
+
+    </style>
+    {% include '/image_classify/mymodal_pili.html' %}
+
+{% endblock %}

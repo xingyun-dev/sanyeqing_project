@@ -1,0 +1,205 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "三叶识青"
+			}
+		}
+	    ,{
+            "path" : "pages/apiuse/apiuse",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+		,{
+		    "path" : "pages/shibie/shibie",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "识别拍照",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/mine/mine",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "历史记录",
+                "enablePullDownRefresh": true
+            }
+            
+        }  
+		
+		,{
+            "path" : "pages/photo/photo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "识别",
+                "enablePullDownRefresh": true
+            }
+            
+        }
+        ,{
+            "path" : "pages/image_zhanshi/image_zhanshi",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "图库",
+                "enablePullDownRefresh": true
+            }
+            
+        }
+		,{
+		    "path" : "pages/image_zhanshi_my/image_zhanshi_my",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "我的图片",
+		        "enablePullDownRefresh": true
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/person/person",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的",
+                "enablePullDownRefresh": true
+            }
+            
+        }
+		,{
+		    "path" : "pages/WebView/WebView",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": true
+		    }
+		    
+		}
+		,{
+		    "path" : "pages/about/about",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "关于我们",
+		        "enablePullDownRefresh": true
+		    }
+		    
+		}
+      
+		,{
+		    "path" : "pages/login/login",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "登录",
+		        "enablePullDownRefresh": true
+		    }
+		    
+		}
+		
+        ,{
+            "path" : "pages/image/image",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "图像识别",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        
+        ,{
+            "path" : "pages/bodys/bodys",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "批量处理",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+		,{
+		    "path" : "pages/bodys/Edit",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "编辑处理",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/piliang/piliang",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/comment/comment",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "对话笔记",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+      
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+			"color": "#7A7E83",
+			"selectedColor": "#007AFF",
+			"borderStyle": "black",
+			"backgroundColor": "#F8F8F8",
+			"midButton":{
+						"text":"识别",
+						"pagePath":"pages/photo/photo",
+						"iconPath":"static/拍照.png",
+						"selectedIconPath":"static/拍照.png"
+					},
+			
+			"list": [
+				{
+				    "pagePath": "pages/index/index",
+				    "iconPath": "static/首页.png",
+				    "selectedIconPath": "static/首页.png",
+				    "text": "首页"
+				},
+				{
+				    "pagePath": "pages/image_zhanshi/image_zhanshi",
+				    "iconPath": "static/图库.png",
+				    "selectedIconPath": "static/图库.png",
+				    "text": "图库"
+				},
+				{
+				    "pagePath": "pages/photo/photo",
+				    "iconPath": "static/拍照.png",
+				    "selectedIconPath": "static/拍照.png",
+				    "text": "识别"
+				},
+				
+				
+				{
+				    "pagePath": "pages/mine/mine",
+				    "iconPath": "static/历史记录.png",
+				    "selectedIconPath": "static/历史记录.png",
+				    "text": "历史记录"
+				},
+				{
+				    "pagePath": "pages/person/person",
+				    "iconPath": "static/我的.png",
+				    "selectedIconPath": "static/我的.png",
+				    "text": "我的"
+				}
+			]
+		}
+		
+		  
+}

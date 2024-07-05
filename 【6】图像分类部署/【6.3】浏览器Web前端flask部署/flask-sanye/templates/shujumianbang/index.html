@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+
+    <title>三叶识青☘{{ user_at.nickname }}的个人中心</title>
+
+    <link rel="icon" href="/img/sanyeqing.ico">
+    <link href="/person/css/float-chart.css" rel="stylesheet"/>
+    <link href="/person/css/style.min.css" rel="stylesheet"/>
+     <style>
+        .font-light{
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+{% include '/shujumianbang/side-header.html' %}
+
+
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                    <h4 class="page-title">个人中心</h4>
+                    <div class="ms-auto text-end">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                    <li id="time" style="font-size: 15px"></li>
+
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-md-flex align-items-center">
+                                <div>
+                                    <h4 class="card-title">数据总览</h4>
+                                    <h5 class="card-subtitle">展示网站的相关信息</h5>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-lg-3">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="bg-dark p-10 text-white text-center">
+                                                <i class="mdi mdi-image fs-3 mb-1 font-16"></i>
+                                                <h5 class="mb-0 mt-1">{{photo_count}}</h5>
+                                                <small class="font-light">图片库总量</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="bg-dark p-10 text-white text-center">
+                                                <i class="mdi mdi-image-multiple fs-3 font-16"></i>
+                                                <h5 class="mb-0 mt-1">{{ photo_user_count }}</h5>
+                                                <small class="font-light">我的图片量</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 mt-3">
+                                            <div class="bg-dark p-10 text-white text-center">
+                                                <i class="mdi mdi-account-alert fs-3 mb-1 font-16"></i>
+                                                <h5 class="mb-0 mt-1">{{user_count}}</h5>
+                                                <small class="font-light">用户总量</small>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 mt-3">
+                                            <div class="bg-dark p-10 text-white text-center">
+                                                <i class="mdi mdi-history fs-3 mb-1 font-16"></i>
+                                                <h5  id="historyCount" class="mb-0 mt-1"></h5>
+                                                <small class="font-light">历史记录</small>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- column -->
+                                <!-- column -->
+                                <div class="col-lg-6">
+
+                                    <div style="text-align: center;">
+
+                                        <div><img
+                                                style="width: 100px;height: 100px;margin-top: 10px; border-radius: 50%;"
+                                                data-v-5244ef91="" data-v-03256cc6="" loading="eager"
+                                                src="/chat_room/images/{{user_at.avatar}}"
+                                                alt="用户的个人资料头像" class="lazy avatar-img immediate"></div>
+                                        <div>
+                                            <div data-v-20db666e="" class="top">
+                                                <div data-v-20db666e="" class="left">
+                                                    <h1 data-v-20db666e="" class="username"><span data-v-20db666e=""
+                                                                                                  class="user-name">{{user_at.nickname}}</span>
+                                                    </h1>
+                                                </div>
+                                            </div>
+
+                                            <div style="margin-top: 10px;">
+                                                <div>
+                                                    <div>
+                                                    {% if user_at.userid == session.userid %}
+
+                                                        <div>
+                                                            用户创建时间： &nbsp;&nbsp;{{user_at.createtime}}
+                                                        </div>
+                                                    {% endif %}
+
+                                                    </div>
+                                                    <div data-v-20db666e="" class="intro">
+                                                        <div>
+                                                            我的图片量：&nbsp;&nbsp;{{photo_user_count}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    {% if user_at.userid == session.userid %}
+                                                    <div>我注册邮箱为：&nbsp;&nbsp; {{user_at.username}}</div>
+
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div> <!---->
+                                    </div>
+                                    <!-- </div> -->
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div
+                                            style="color: rgb(15, 13, 36);font-size: 15px;font-weight: 1000;margin-bottom: 10px;">
+                                        用户介绍：
+                                    </div>
+                                    {{user_at.introduce}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <!-- Column -->
+
+                <div class="col-md-6 col-lg-2 col-xlg-3">
+                    <div class="card card-hover">
+                        <a href="/person/{{user_at.userid}}">
+                        <div class="box bg-cyan text-center">
+                            <h1 class="font-light text-white">
+                                <i class="mdi mdi-account"></i>
+                            </h1>
+
+                            <h6 class="text-white">个人中心</h6>
+
+                        </div>
+                              </a>
+                    </div>
+                </div>
+
+                <!-- Column -->
+
+                <div class="col-md-6 col-lg-4 col-xlg-3">
+                    <div class="card card-hover">
+                        <a href="/photo">
+                        <div class="box bg-success text-center">
+                            <h1 class="font-light text-white">
+                                <i class="mdi mdi-image"></i>
+                            </h1>
+
+                            <h6 class="text-white">图片库</h6>
+
+                        </div>
+                             </a>
+                    </div>
+                </div>
+
+                <!-- Column -->
+                <div class="col-md-6 col-lg-2 col-xlg-3">
+                    <div class="card card-hover">
+                         <a href="/classify">
+                        <div class="box bg-danger text-center">
+                            <h1 class="font-light text-white">
+                                <i class="mdi mdi-glasses"></i>
+                            </h1>
+                            <h6 class="text-white">图像识别</h6>
+                        </div>
+                         </a>
+                    </div>
+                </div>
+                <!-- Column -->
+                <div class="col-md-6 col-lg-4 col-xlg-3">
+                    <div class="card card-hover">
+                         <a href="/classify_pili">
+                        <div class="box bg-info text-center">
+                            <h1 class="font-light text-white">
+                                <i class="mdi mdi-battery-charging"></i>
+                            </h1>
+                            <h6 class="text-white">批量处理</h6>
+                        </div>
+                         </a>
+                    </div>
+                </div>
+                <!-- Column -->
+                <div class="col-md-6 col-lg-3 col-xlg-3">
+                    <div class="card card-hover">
+                         <a href="/history">
+                        <div class="box bg-info text-center">
+                            <h1 class="font-light text-white">
+                                <i class="mdi mdi-history"></i>
+                            </h1>
+                            <h6 class="text-white">历史记录</h6>
+                        </div>
+                         </a>
+                    </div>
+                </div>
+                <!-- Column -->
+                <div class="col-md-6 col-lg-4 col-xlg-3">
+                    <div class="card card-hover">
+                         <a href="/qita">
+                        <div class="box bg-danger text-center">
+                            <h1 class="font-light text-white">
+                                <i class="mdi mdi-tag-heart"></i>
+                            </h1>
+                            <h6 class="text-white">其它</h6>
+                        </div>
+                         </a>
+                    </div>
+                </div>
+                 <div class="col-md-6 col-lg-2 col-xlg-3">
+                    <div class="card card-hover">
+                         <a href="/photo/{{ user_at.userid }}">
+                        <div class="box bg-warning text-center">
+                            <h1 class="font-light text-white">
+                                <i class="mdi mdi-image-multiple"></i>
+                            </h1>
+                            <h6 class="text-white">我的图片</h6>
+                        </div>
+                         </a>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-lg-3 col-xlg-3">
+                    <div class="card card-hover">
+                         <a href="/home/{{ user_at.userid }}">
+                        <div class="box bg-success text-center">
+                            <h1 class="font-light text-white">
+                                <i class="mdi mdi-view-dashboard"></i>
+                            </h1>
+                            <h6 class="text-white">我的首页</h6>
+                        </div>
+                         </a>
+                    </div>
+                </div>
+                <!-- Column -->
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+
+</div>
+</div>
+
+
+<script>
+    //顶部时间
+    function getTime() {
+        var myDate = new Date();
+        var myYear = myDate.getFullYear(); //获取完整的年份(4位,1970-????)
+        var myMonth = myDate.getMonth() + 1; //获取当前月份(0-11,0代表1月)
+        var myToday = myDate.getDate(); //获取当前日(1-31)
+        var myDay = myDate.getDay(); //获取当前星期X(0-6,0代表星期天)
+        var myHour = myDate.getHours(); //获取当前小时数(0-23)
+        var myMinute = myDate.getMinutes(); //获取当前分钟数(0-59)
+        var mySecond = myDate.getSeconds(); //获取当前秒数(0-59)
+        var week = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        var nowTime;
+
+        nowTime = myYear + '年' + fillZero(myMonth) + '月' + fillZero(myToday) + '日' + '&nbsp;&nbsp;' + fillZero(myHour) + ':' + fillZero(myMinute) + ':' + fillZero(mySecond) + '&nbsp;&nbsp;' + week[myDay] + '&nbsp;&nbsp;';
+        //console.log(nowTime);
+        $('#time').html(nowTime);
+    };
+    function fillZero(str) {
+        var realNum;
+        if (str < 10) {
+            realNum = '0' + str;
+        } else {
+            realNum = str;
+        }
+        return realNum;
+    }
+    //大屏
+    setInterval(getTime, 1000);
+</script>
+
+<script src="/person/js/jquery.min.js"></script>
+<!--    <script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>-->
+
+<!-- Bootstrap tether Core JavaScript -->
+<script src="/person/js/bootstrap.bundle.min.js"></script>
+<script src="/person/js/perfect-scrollbar.jquery.min.js"></script>
+<script src="/person/js/sparkline.js"></script>
+<!--Wave Effects -->
+<script src="/person/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/person/js/sidebarmenu.js"></script>
+<!--Custom JavaScript -->
+<script src="/person/js/custom.min.js"></script>
+<!--This page JavaScript -->
+<!-- <script src="../dist/js/pages/dashboards/dashboard1.js"></script> -->
+<!-- Charts js Files -->
+<script src="/person/js/excanvas.js"></script>
+<script src="/person/js/jquery.flot.js"></script>
+<script src="/person/js/jquery.flot.pie.js"></script>
+<script src="/person/js/jquery.flot.time.js"></script>
+<script src="/person/js/jquery.flot.stack.js"></script>
+<script src="/person/js/jquery.flot.crosshair.js"></script>
+<script src="/person/js/jquery.flot.tooltip.min.js"></script>
+<script src="/person/js/chart-page-init.js"></script>
+<script>
+    // 从localStorage获取历史记录
+const history = JSON.parse(localStorage.getItem('recognitionHistory')) || [];
+
+// 获取历史记录的数量
+const historyCount = history.length;
+
+// 获取显示历史记录数量的元素
+const historyCountElement = document.getElementById('historyCount');
+
+// 将历史记录的数量设置为这个元素的文本内容
+historyCountElement.textContent = historyCount;
+
+
+</script>
+</body>
+
+</html>

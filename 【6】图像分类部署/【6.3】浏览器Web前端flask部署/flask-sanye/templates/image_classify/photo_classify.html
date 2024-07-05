@@ -1,0 +1,334 @@
+{% extends "/image_classify/base.html" %}   {#将当前页面继承至base.html母版#}
+{% block content %}
+
+    <div class="mediabanner">
+        <img src="/img/sanye.png" class="bg" alt=""/>
+        <div class="text">
+            <h3>三叶青在线图像识别</h3>
+            <p>用于实现三叶青块根、叶片图像根据省份的分类;<br>目前产地暂时共分为五大省份：云南省、广西省、浙江省、贵州省、陕西省。
+            </p>
+              <p>此在线识别页面和批量处理页面，因会将识别操作记录在浏览器缓存中，故要定时清理历史记录，否则无法识别；或者可以前往首页进行快速识别;
+            </p>
+        </div>
+    </div>
+    <div style="height: 20px"></div>
+
+    <div class="sidebar show-sidebar">
+
+        <div class="card rounded-lg mb-3 relative">
+        </div>
+
+    </div>
+
+    <div style="margin-bottom: 2rem; ">
+        <div class="border-xiaowo"></div>
+        <p style="font-size: 3.0rem; text-align: center;align-content: center;color: #382d62;">
+            块根识别</p>
+        <div style="float:left;" class="img_zhanshi">
+            <a href="javascript:;" class="file" style="background-color: #fff3cd;cursor:pointer;">选择文件
+                <input type="file" name="file" id="file0"><br>
+            </a>
+            <img src="" id="img0" style="margin-top:20px;">
+        </div>
+        <div class="font_predict" style="float:left;margin-left:5rem;margin-right: 12rem">
+            <input type="button" id="b0" onclick="test()" value="预测">
+            <pre id="out" style="width:40rex;height:35rem;line-height: 50px;margin-top:20px;"></pre>
+        </div>
+    </div>
+    <div class="card rounded-lg relative submit_div" style="display: none;">
+        <div class="card-body">三叶青块根识别
+            <button type="submit" id="submit"
+                    class="btn btn-danger custom_btn-d text-sm col-12 custom-submit" onclick="submit_photos_model()"><i
+                    class="mr-2"></i>提交预测结果
+            </button>
+        </div>
+
+        <div style="height: 20px"></div>
+    </div>
+    <div style="clear:both"></div> <!-- 添加这行来清除浮动 -->
+    <div style="margin-bottom: 2rem">
+        <p style="font-size: 3.0rem; text-align:center;align-content:center;color: #382d62">
+            叶片识别</p>
+        <div class="border-xiaowo"></div>
+
+        <div style="float:left;" class="img_zhanshi">
+            <a href="javascript:;" class="file" style="background-color: #fff3cd;cursor:pointer;">选择文件
+                <input type="file" name="file" id="file1"><br>
+            </a>
+            <img src="" id="img1" style="margin-top:20px;">
+        </div>
+        <div class="font_predict" style="float:left;margin-left:5rem;margin-right: 12rem">
+            <input type="button" id="b0" onclick="test_1()" value="预测">
+            <pre id="out1" style="width:40rex;height:35rem;line-height: 50px;margin-top:20px;"></pre>
+        </div>
+    </div>
+    <div class="card rounded-lg relative submit_div_ye" style="display: none;">
+        <div class="card-body">三叶青叶片识别
+            <button type="submit" id="submit"
+                    class="btn btn-success custom_btn-d text-sm col-12 custom-submit"
+                    onclick="submit_photos_model_ye()"><i
+                    class="mr-2"></i>提交预测结果
+            </button>
+        </div>
+
+        <div style="height: 20px"></div>
+    </div>
+
+
+
+    <script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="/js/login.js"></script>
+
+    <!-- JS -->
+    <script src="/home/js/script.js"></script>
+    <script>
+        function submit_photos_model() {
+            $('#myModal').modal('show');
+        }
+
+        function submit_photos_model_ye() {
+            $('#myModal_ye').modal('show');
+        }
+    </script>
+
+    <script type="text/javascript">
+        $("#file0").change(function () {
+            var objUrl = getObjectURL(this.files[0]);//获取文件信息
+            console.log("objUrl = " + objUrl);
+            if (objUrl) {
+                $("#img0").attr("src", objUrl);
+            }
+        });
+
+        function test() {
+            var highestConfidence = 0;
+            var highestCategory = '';
+            var fileobj = $("#file0")[0].files[0];
+            console.log(fileobj);
+            var form = new FormData();
+            form.append("file", fileobj);
+            var out = '';
+            var flower = '';
+            $.ajax({
+                type: 'POST',
+                url: "/predict",
+                data: form,
+                async: false,       //同步执行
+                processData: false, // 告诉jquery要传输data对象
+                contentType: false, //告诉jquery不需要增加请求头对于contentType的设置
+                success: function (arg) {
+
+                    out = arg.result;
+                    // 对结果进行排序
+                    var top1 = out.sort((a, b) => {
+                        var aConfidence = parseFloat(a.split('置信度:')[1]);  // 提取a的置信度
+                        var bConfidence = parseFloat(b.split('置信度:')[1]);  // 提取b的置信度
+                        return bConfidence - aConfidence;
+                    }).slice(0, 1);
+
+
+// 存储到历史记录中
+                    var history = JSON.parse(localStorage.getItem('recognitionHistory')) || [];
+                    history.push({
+                        type: '块根识别', // 操作类别
+                        imageUrl: $("#img0").attr("src"),
+                        result: top1, // 只存储置信度最高的结果
+                        time: new Date().toISOString(),
+                    });
+                    localStorage.setItem('recognitionHistory', JSON.stringify(history));
+                }, error: function () {
+                    console.log("后台处理错误");
+                }
+            });
+
+            out.forEach(e => {
+                flower += `<div style="border-bottom: 1px solid #CCCCCC;line-height: 60px;font-size:16px;">${e}</div>`
+            });
+
+            document.getElementById("out").innerHTML = flower;
+
+            // 找到置信度最高的类别
+            out.forEach(e => {
+                let parts = e.split('置信度:');
+                let category = parts[0].split(':')[1].trim();  // 提取类别
+                let confidence = parseFloat(parts[1]);  // 提取置信度
+                if (confidence > highestConfidence) {
+                    highestConfidence = confidence;
+                    highestCategory = category;
+                }
+
+
+                flower += `<div style="border-bottom: 1px solid #CCCCCC;line-height: 60px;font-size:16px;">${e}</div>`;
+            });
+            // 修改模态框中的预测结果
+            document.getElementById("predictionResult").textContent = highestCategory;
+            // 当预测结束并得到结果后
+            var elements = document.getElementsByClassName('submit_div');
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].style.display = 'block';
+            }
+
+        }
+
+        function getObjectURL(file) {
+            var url = null;
+            if (window.createObjectURL != undefined) {
+                url = window.createObjectURL(file);
+            } else if (window.URL != undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file);
+            } else if (window.webkitURL != undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file);
+            }
+            return url;
+        }
+
+
+        $("#file1").change(function () {
+            var objUrl = getObjectURL(this.files[0]);//获取文件信息
+            console.log("objUrl = " + objUrl);
+            if (objUrl) {
+                $("#img1").attr("src", objUrl);
+            }
+        });
+
+        function test_1() {
+            var highestConfidence = 0;
+            var highestCategory = '';
+            var fileobj = $("#file1")[0].files[0];
+            console.log(fileobj);
+            var form = new FormData();
+            form.append("file", fileobj);
+            var out = '';
+            var flower = '';
+            $.ajax({
+                type: 'POST',
+                url: "/predict",
+                data: form,
+                async: false,       //同步执行
+                processData: false, // 告诉jquery要传输data对象
+                contentType: false, //告诉jquery不需要增加请求头对于contentType的设置
+                success: function (arg) {
+
+                    out = arg.result;
+                    // 对结果进行排序
+                    var top1 = out.sort((a, b) => {
+                        var aConfidence = parseFloat(a.split('置信度:')[1]);  // 提取a的置信度
+                        var bConfidence = parseFloat(b.split('置信度:')[1]);  // 提取b的置信度
+                        return bConfidence - aConfidence;
+                    }).slice(0, 1);
+
+// 存储到历史记录中
+                    var history = JSON.parse(localStorage.getItem('recognitionHistory')) || [];
+                    history.push({
+                        type: '叶片识别', // 操作类别
+                        imageUrl: $("#img1").attr("src"),
+                        result: top1, // 只存储置信度最高的结果
+                        time: new Date().toISOString(),
+                    });
+                    localStorage.setItem('recognitionHistory', JSON.stringify(history));
+                }, error: function () {
+                    console.log("后台处理错误");
+                }
+            });
+
+            out.forEach(e => {
+                flower += `<div style="border-bottom: 1px solid #CCCCCC;line-height: 60px;font-size:16px;">${e}</div>`
+            });
+
+            document.getElementById("out1").innerHTML = flower;
+            // 找到置信度最高的类别
+            out.forEach(e => {
+                let parts = e.split('置信度:');
+                let category = parts[0].split(':')[1].trim();  // 提取类别
+                let confidence = parseFloat(parts[1]);  // 提取置信度
+                if (confidence > highestConfidence) {
+                    highestConfidence = confidence;
+                    highestCategory = category;
+                }
+
+
+                flower += `<div style="border-bottom: 1px solid #CCCCCC;line-height: 60px;font-size:16px;">${e}</div>`;
+            });
+
+            // 修改模态框中的预测结果
+            document.getElementById("predictionResult_ye").textContent = highestCategory;
+
+            // 当预测结束并得到结果后
+            var elements = document.getElementsByClassName('submit_div_ye');
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].style.display = 'block';
+            }
+
+        }
+
+
+    </script>
+    <style>
+        .img_zhanshi img {
+            width: 35rem;
+            height: 30rem;
+        }
+
+        .file {
+            position: relative;
+            /*display: inline-block;*/
+            background: #CCC;
+            border: 1px solid #CCC;
+            padding: 4px 4px;
+            overflow: hidden;
+            text-decoration: none;
+            text-indent: 0;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 5px;
+            color: #333;
+            font-size: 13px;
+
+        }
+
+        .file input {
+            position: absolute;
+            font-size: 13px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            border: 1px solid #333;
+            padding: 4px 4px;
+            overflow: hidden;
+            text-indent: 0;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            border-radius: 5px;
+            color: #FFFFFF;
+
+        }
+
+        #b0 {
+            background: #1899FF;
+            border: 1px solid #CCC;
+            padding: 4px 10px;
+            overflow: hidden;
+            text-indent: 0;
+            width: 60px;
+            height: 28px;
+            line-height: 20px;
+            border-radius: 5px;
+            color: #FFFFFF;
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+            .img_zhanshi img {
+                width: 25rem;
+                height: 25rem;
+            }
+        }
+
+    </style>
+    {% include '/image_classify/mymodal.html' %}
+
+{% endblock %}

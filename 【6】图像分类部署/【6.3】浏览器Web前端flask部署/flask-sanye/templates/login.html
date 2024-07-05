@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>三叶识青☘登录页面</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/login_css.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" href="/css/bootstrap4.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/qita/login.css">
+    <link rel="icon" href="/img/sanyeqing.ico">
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/login.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+</head>
+<body>
+<!-- 居中 -->
+<div class="container" style="margin-top: 5%">
+    <!-- 缓慢缩小 缩小 -->
+    <div class="row smdaohanglan">
+        <div class="col-md-6 login text-center text-md-center"
+             style="margin-bottom: 80px">
+            <div class="box">
+                <div class="container-login" style=" width:90%;">
+                    <div class="form">
+                        <!-- 与登录和注册窗口的ID进行关联 -->
+                        <div class="tab-pane" id="tabs" style="text-align: center">
+                            <button></button>
+                            <ul class="nav nav-tabs" role="tablist"
+                                style="font-size: 20px;margin-right: 12%; margin-top:8%;letter-spacing:10px">
+                                <li id="login " class="nav-item " onclick="showLogin()">
+                                    <a href="#loginpane" data-toggle="tab" class="nav-link "
+                                       style="color: rgb(45, 154, 243);"><span>登录</span></a>
+                                </li>
+                                <li id="reg" class="nav-item" onclick="showReg()">
+                                    <a href="#regpane" data-toggle="tab" class="nav-link "
+                                       style="color:rgb(45, 154, 243)"><span>注册</span></a>
+                                </li>
+                                <li id="find" class="nav-item" onclick="showReset()">
+                                    <a href="#findpane" data-toggle="tab" class="nav-link "
+                                       style="color: rgb(45, 154, 243)"><span>找回密码</span></a>
+                                </li>
+                            </ul>
+
+                            <div style="margin-top: 130px;"></div>
+
+                            <div class="tab-content">
+                                <!-- 登录窗口 -->
+                                <div id="loginpanel" class="tab-pane active container">
+                                    <div class="inputBox row">
+                                        <label for="loginname" class="col-2" style="font-size:26px">✉</label>
+                                        <input class="col-10" type="text" id="loginname"
+                                               placeholder="请输入你的邮箱地址">
+                                    </div>
+                                    <div class="inputBox row">
+                                        <label for="loginpass" class="col-2" style="font-size:22px">🔏</label>
+                                        <input class="col-10" type="password" id="loginpass"
+                                               placeholder="请输入你的登录密码">
+                                    </div>
+                                    <div class="inputBox row" style="text-align: center;">
+                                        <label for="logincode" class="col-2" style="font-size:22px">💳</label>
+                                        <input class="col-10" type="text" id="logincode"
+                                               placeholder="请输入图形验证码"
+                                               onkeyup="doLogin(event)"/>
+                                        <div style="margin-top: 20px;text-align:right; width:100% ">
+                                            <img src="/vcode" id="loginvcode" class="col-9"
+                                                 style="cursor:pointer; margin-top: 10px; width:30%; border-radius:30%;"
+                                                 onclick="this.src='/vcode?'+Math.random()"/>
+                                        </div>
+                                    </div>
+                                    <div class="inputBox">
+                                        <input type="submit" value="登录" onclick="doLogin(null)"/>
+                                        <!--                                    <button type="submit" class="btn btn-primary" onclick="doLogin(null)">登录</button>-->
+
+                                    </div>
+                                </div>
+
+
+                                <!-- 注册窗口 -->
+                                <div class="tab-pane container" id="regpanel">
+                                    <div class="inputBox row">
+                                        <label for="regname" class="col-2" style="font-size:26px">✉</label>
+
+                                        <input class='col-10' type="text" id="regname"
+                                               placeholder="请输入你的注册邮箱"/>
+                                    </div>
+                                    <div class="inputBox row">
+                                        <label for="regpass" class="col-2" style="font-size:22px">🔏</label>
+                                        <input class='col-10' type="password" id="regpass"
+                                               placeholder="请输入你的注册密码"/>
+                                    </div>
+                                    <div class="inputBox row" style="text-align: center;">
+                                        <label for="regcode" class="col-2" style="font-size:22px">💳</label>
+                                        <input class="col-10" type="text" id="regcode"
+                                               placeholder="请输入邮箱验证码"
+                                               onkeyup="doReg(event)"/>
+
+                                        <div style="text-align: right; margin-top:20px;width:100% ;height:60px">
+                                            <button style="margin-top: 10px;margin-right:6%; width:25%;height:70%; border-radius:20%;font-size:16px"
+                                                    type="button"
+                                                    class="btn btn-primary col-3 "
+                                                    onclick="doSendMail(this)">
+                                                发送邮件
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="inputBox">
+                                        <input type="submit" value="注册" onclick="doReg(null)">
+
+                                    </div>
+                                </div>
+
+
+                                <!-- 找回密码窗口 -->
+                                <div class="tab-pane container " id="findpanel">
+
+                                    <div class="inputBox row" >
+                                        <label for="username" class="col-2" style="font-size:26px;">✉</label>
+                                        <input class="col-10" type="text" id="username"
+                                               placeholder="请输入你的邮箱地址">
+                                    </div>
+
+                                    <div class="inputBox row">
+                                        <label for="newpass" class="col-2" style="font-size:22px">🔏</label>
+                                        <input class="col-10" type="password" id="newpass"
+                                               placeholder="请输入新的登录密码">
+                                    </div>
+                                    <div class="inputBox row">
+                                        <label for="findcode" class="col-2" style="font-size:22px">💳</label>
+                                        <input class="col-10" type="text" placeholder="请输入邮箱验证码"
+                                               id="findcode"
+                                               onkeyup="doReset(event)">
+                                        <div style="text-align: right; margin-top:20px;width:100% ;height:60px">
+                                            <button style="margin-top: 10px;margin-right:6%; width:25%;height:70%; border-radius:20%;font-size:16px"
+                                                    type="button"
+                                                    class="btn btn-primary col-3 "
+                                                    onclick="SendMail(this)">
+                                                发送邮件
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="inputBox">
+                                        <input type="submit" value="重置密码" onclick="doReset(null)">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 text-center text-md-left" style="margin-bottom:290px;color: #fff3cd;">
+            <span style="font-size: 2.0rem">登录 / 注册</span>
+            <h3 style="font-size: 2.5rem">请选择登录注册或是游客模式</h3>
+
+            <p></p>
+            <h3>在这里 一起体验</h3>
+
+            <a href="/youke_home" class="link-btn">游客模式</a>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- copyright -->
+<div class="w3copyright-agile">
+    <p>© 2024 三叶识青</p>
+</div>
+<!-- //copyright -->
+<ul class="w3lsg-bubbles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+
+
+</body>
+</html>
+

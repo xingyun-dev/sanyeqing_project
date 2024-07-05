@@ -1,0 +1,362 @@
+<link rel="stylesheet" href="/css/mymodal.css">
+<script type="text/javascript" src="/js/mymodal.js"></script>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">块根图片提交（如果不修改结果，默认提交预测结果）</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="settingForm">
+                    <!-- 这里开始的部分被修改为列表 -->
+                    <ul id="predictionList">
+                        <!-- 列表元素和输入框将由JavaScript动态添加 -->
+                    </ul>
+                    <!-- 列表部分结束 -->
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="submit_photos_batch()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal_ye" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">叶片图片提交（如果不修改结果，默认提交预测结果）</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="settingForm">
+                    <!-- 这里开始的部分被修改为列表 -->
+                    <ul id="predictionList_ye">
+                        <!-- 列表元素和输入框将由JavaScript动态添加 -->
+                    </ul>
+                    <!-- 列表部分结束 -->
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="submit_photos_batch_ye()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#myModal').modal('hide')
+    });
+
+
+    function submit_photos_batch() {
+        // 获取表格元素
+        var table = document.getElementById('predictionList');
+
+        // 获取表格的所有行
+        var rows = table.getElementsByTagName('tr');
+
+        // 使用Promise.all等待所有文件都读取完毕并提交
+        Promise.all(Array.from(selectedFiles).map((file, i) => {
+            return new Promise((resolve, reject) => {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    // 获取最大置信度对应的类别，修改框的值
+                    var cells = rows[i + 1].getElementsByTagName('td');
+                    var highestCategory = cells[1].textContent;
+                    var modifiedCategory = cells[2].getElementsByTagName('input')[0].value;
+
+                    // 如果修改框的值为空，则使用最大置信度对应的类别
+                    var finalCategory = modifiedCategory ? modifiedCategory : highestCategory;
+
+                    // 提交单个图片的数据
+                    submit_photos_add(e.target.result, finalCategory);
+                    resolve();
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        })).then(() => {
+            console.log("All files submitted.");
+        }).catch(error => {
+            console.error("Error reading files:", error);
+        });
+    }
+
+     function submit_photos_batch_ye() {
+        // 获取表格元素
+        var table = document.getElementById('predictionList_ye');
+
+        // 获取表格的所有行
+        var rows = table.getElementsByTagName('tr');
+
+        // 使用Promise.all等待所有文件都读取完毕并提交
+        Promise.all(Array.from(selectedFiles_ye).map((file, i) => {
+            return new Promise((resolve, reject) => {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    // 获取最大置信度对应的类别，修改框的值
+                    var cells = rows[i + 1].getElementsByTagName('td');
+                    var highestCategory = cells[1].textContent;
+                    var modifiedCategory = cells[2].getElementsByTagName('input')[0].value;
+
+                    // 如果修改框的值为空，则使用最大置信度对应的类别
+                    var finalCategory = modifiedCategory ? modifiedCategory : highestCategory;
+
+                    // 提交单个图片的数据
+                    submit_photos_add_ye(e.target.result, finalCategory);
+                    resolve();
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        })).then(() => {
+            console.log("All files submitted.");
+        }).catch(error => {
+            console.error("Error reading files:", error);
+        });
+    }
+
+    function submit_photos_add(photoData, finalCategory) {
+        // 创建一个对象来存储predict和photos_type的对应关系
+        var typeMap = {
+            '云南省': '11',
+            '广西省': '12',
+            '贵州省': '14',
+            '浙江省': '13',
+            '陕西省': '15',
+        };
+
+        // 使用predict的值来从typeMap中获取photos_type的值
+        // 如果typeMap中没有对应的值，则使用默认值'3'
+        var photos_type = typeMap[finalCategory] || '3';
+        var param = "&photos_type=" + encodeURIComponent(photos_type);
+        param += "&photos_name=" + encodeURIComponent(photoData.split(',')[1]); // 提交真实的Base64数据，不包含"data:image...base64,"部分
+        param += "&predict=" + finalCategory;
+        {#console.log(param)#}
+        $.post('/insert_photos', param, function (data) {
+            if (data == 'perm-denied') {
+                bootbox.alert({title: "错误提示", message: "还未登录，无法提交"});
+                {#alert('权限不足，无法提交')#}
+            } else if (data == 'add-fail') {
+                bootbox.alert({title: "错误提示", message: "提交失败，请联系管理员"});
+                {#alert('提交失败，请联系管理员')#}
+            } else if (data == 'add-pass') {
+                bootbox.alert({title: "信息提示", message: "提交成功！"});
+                setTimeout(function () {
+                    location.href = '/classify_pili';
+                }, 1000);
+            } else {
+                bootbox.alert({title: "错误提示", message: "提交失败,可能出现错误."});
+                {#alert('提交失败,可能出现错误.')#}
+
+            }
+        }).fail(function () {
+            // 处理AJAX请求失败的情况
+            alert('ajax请求失败')
+            console.error('AJAX request failed');
+        });
+    }
+
+
+    function submit_photos_add_ye(photoData, finalCategory) {
+        // 创建一个对象来存储predict和photos_type的对应关系
+        var typeMap = {
+            '云南省': '21',
+            '广西省': '22',
+            '贵州省': '24',
+            '浙江省': '23',
+            '陕西省': '25',
+        };
+
+        // 使用predict的值来从typeMap中获取photos_type的值
+        // 如果typeMap中没有对应的值，则使用默认值'3'
+        var photos_type = typeMap[finalCategory] || '3';
+        var param = "&photos_type=" + encodeURIComponent(photos_type);
+        param += "&photos_name=" + encodeURIComponent(photoData.split(',')[1]); // 提交真实的Base64数据，不包含"data:image...base64,"部分
+        param += "&predict=" + finalCategory;
+        {#console.log(param)#}
+        $.post('/insert_photos', param, function (data) {
+            if (data == 'perm-denied') {
+                bootbox.alert({title: "错误提示", message: "还未登录，无法提交"});
+                {#alert('权限不足，无法提交')#}
+            } else if (data == 'add-fail') {
+                bootbox.alert({title: "错误提示", message: "提交失败，请联系管理员"});
+                {#alert('提交失败，请联系管理员')#}
+            } else if (data == 'add-pass') {
+                bootbox.alert({title: "信息提示", message: "提交成功！"});
+                setTimeout(function () {
+                    location.href = '/classify_pili';
+                }, 1000);
+            } else {
+                bootbox.alert({title: "错误提示", message: "提交失败,可能出现错误."});
+                {#alert('提交失败,可能出现错误.')#}
+
+            }
+        }).fail(function () {
+            // 处理AJAX请求失败的情况
+            alert('ajax请求失败')
+            console.error('AJAX request failed');
+        });
+    }
+
+    // 创建动态列表的函数
+    function createDynamicList() {
+        // 获取表格元素
+        var table = document.getElementById('predictionList');
+
+        // 清空表格
+        while (table.firstChild) {
+            table.removeChild(table.firstChild);
+        }
+
+        // 创建表头
+        var thead = document.createElement('thead');
+        var tr = document.createElement('tr');
+        ['序号', '预测结果', '修改结果'].forEach(text => {
+            var th = document.createElement('th');
+            th.textContent = text;
+            th.className = 'center';  // 将类添加到<th>元素
+            tr.appendChild(th);
+        });
+        thead.appendChild(tr);
+        table.appendChild(thead);
+
+        // 创建表体
+        var tbody = document.createElement('tbody');
+        // 为每个图片和预测结果创建一个表格行和三个单元格
+        photo_names.forEach(function (photo_name, index) {
+            var result = results[index];
+
+            // 找到置信度最高的类别
+            var highestConfidence = 0;
+            var highestCategory = '';
+            result.forEach(e => {
+                let parts = e.split('置信度:');
+                let category = parts[0].split(':')[1].trim();  // 提取类别
+                let confidence = parseFloat(parts[1]);  // 提取置信度
+                if (confidence > highestConfidence) {
+                    highestConfidence = confidence;
+                    highestCategory = category;
+                }
+            });
+
+            // 创建表格行
+            var tr = document.createElement('tr');
+
+            // 创建单元格：图片序号
+            var td = document.createElement('td');
+            td.textContent = index + 1;
+            tr.appendChild(td);
+
+            // 创建单元格：最大置信度对应的类别
+            td = document.createElement('td');
+            td.textContent = highestCategory;
+            tr.appendChild(td);
+
+            // 创建单元格：修改框
+            td = document.createElement('td');
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.size = '20';  // 设置输入框的大小
+            td.appendChild(input);
+            tr.appendChild(td);
+
+            // 将表格行添加到表体中
+            tbody.appendChild(tr);
+        });
+        // 将表体添加到表格中
+        table.appendChild(tbody);
+    }
+
+
+
+    // 创建动态列表的函数
+    function createDynamicList_ye() {
+        // 获取表格元素
+        var table = document.getElementById('predictionList_ye');
+
+        // 清空表格
+        while (table.firstChild) {
+            table.removeChild(table.firstChild);
+        }
+
+        // 创建表头
+        var thead = document.createElement('thead');
+        var tr = document.createElement('tr');
+        ['序号', '预测结果', '修改结果'].forEach(text => {
+            var th = document.createElement('th');
+            th.textContent = text;
+            th.className = 'center';  // 将类添加到<th>元素
+            tr.appendChild(th);
+        });
+        thead.appendChild(tr);
+        table.appendChild(thead);
+
+        // 创建表体
+        var tbody = document.createElement('tbody');
+        // 为每个图片和预测结果创建一个表格行和三个单元格
+        photo_names_ye.forEach(function (photo_name, index) {
+            var result= results_ye[index];
+
+            // 找到置信度最高的类别
+            var highestConfidence_ye = 0;
+            var highestCategory_ye = '';
+            result.forEach(e => {
+                let parts = e.split('置信度:');
+                let category = parts[0].split(':')[1].trim();  // 提取类别
+                let confidence = parseFloat(parts[1]);  // 提取置信度
+                if (confidence > highestConfidence_ye) {
+                    highestConfidence_ye = confidence;
+                    highestCategory_ye = category;
+                }
+            });
+
+            // 创建表格行
+            var tr = document.createElement('tr');
+
+            // 创建单元格：图片序号
+            var td = document.createElement('td');
+            td.textContent = index + 1;
+            tr.appendChild(td);
+
+            // 创建单元格：最大置信度对应的类别
+            td = document.createElement('td');
+            td.textContent = highestCategory_ye;
+            tr.appendChild(td);
+
+            // 创建单元格：修改框
+            td = document.createElement('td');
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.size = '20';  // 设置输入框的大小
+            td.appendChild(input);
+            tr.appendChild(td);
+
+            // 将表格行添加到表体中
+            tbody.appendChild(tr);
+        });
+        // 将表体添加到表格中
+        table.appendChild(tbody);
+    }
+
+</script>
+
+
+<style>
+    .center {
+        text-align: center;
+    }
+</style>

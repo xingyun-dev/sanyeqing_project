@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三叶识青☘历史记录</title>
+    <link rel="icon" href="/img/sanyeqing.ico">
+
+    <link rel="stylesheet" href="/css/bootstrap4.min.css">
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+
+    <style>
+        body {
+            background-color: black;
+        }
+        .font_history{
+            color: #fff3cd;
+        }
+        a{
+            color: white;
+        }
+        a:hover{
+            color: #fff3cd;
+        }
+    </style>
+</head>
+<body>
+<button id="clearButton" class="btn btn-danger" style="align-content: center;">清除前10条历史记录</button>
+<button  class="btn btn-success" style="align-content: center; text-align: right"><a style=" text-decoration: none;" href="/home/{{ session.userid }}">返回首页</a></button>
+
+    <div class="container mt-5">
+
+        <h1 style="color: #fff3cd">图像识别历史记录</h1>
+
+        <table class="table table-striped font_history">
+            <thead>
+                <tr>
+                    <th scope="col" class="col-2">序号</th>
+                    <th scope="col" class="col-2">类别</th>
+                    <th scope="col" class="col-2">图像</th>
+                    <th scope="col" class="col-2">结果</th>
+                    <th scope="col" class="col-2">时间</th>
+                </tr>
+            </thead>
+            <tbody id="historyTable">
+                <!-- 历史记录将会被插入到这里 -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // 从localStorage获取历史记录
+        const history = JSON.parse(localStorage.getItem('recognitionHistory')) || [];
+
+        const table = document.getElementById('historyTable');
+
+        // 遍历历史记录，创建表格行
+        history.forEach((record, index) => {
+            const row = document.createElement('tr');
+
+            const indexCell = document.createElement('th');
+            indexCell.scope = 'row';
+            indexCell.textContent = history.length - index;
+            row.appendChild(indexCell);
+
+            const typeCell = document.createElement('td');
+            typeCell.textContent = record.type;
+            row.appendChild(typeCell);
+
+            const imgCell = document.createElement('td');
+            const img = document.createElement('img');
+            img.src = record.imageUrl;
+            img.style.width = '100px'; // 设置图片宽度
+            imgCell.appendChild(img);
+            row.appendChild(imgCell);
+
+            const resultCell = document.createElement('td');
+            resultCell.textContent = record.result;
+            row.appendChild(resultCell);
+
+            const timeCell = document.createElement('td');
+            timeCell.textContent = new Date(record.time).toLocaleString();
+            row.appendChild(timeCell);
+
+            table.insertBefore(row, table.firstChild);
+        });
+
+        document.getElementById('clearButton').addEventListener('click', function() {
+    // 从localStorage获取历史记录
+    const history = JSON.parse(localStorage.getItem('recognitionHistory')) || [];
+
+    if (history.length <= 10) {
+        // 如果历史记录的数量不超过10条，直接清空
+        localStorage.removeItem('recognitionHistory');
+    } else {
+        // 否则，删除前10条记录
+        history.splice(0, 10);
+        localStorage.setItem('recognitionHistory', JSON.stringify(history));
+    }
+
+    // 刷新页面，使改变立即生效
+    location.reload();
+});
+
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

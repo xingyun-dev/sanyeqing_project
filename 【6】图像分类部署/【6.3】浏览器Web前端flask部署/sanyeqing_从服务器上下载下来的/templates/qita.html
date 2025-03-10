@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三叶识青☘其它</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="/css/bootstrap4.min.css">
+    <link rel="stylesheet" href="/css/lbt.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/font.css">
+    <link rel="stylesheet" href="/css/yj.css">
+    <link rel="stylesheet" href="/qita/login.css">
+    <link rel="icon" href="/img/sanyeqing.ico">
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+
+    <style>
+        wenzi {
+            /* 让弹出来的文字不被选中,影响操作体验 */
+            user-select: none;
+            cursor: default;
+            font-size: 20px;
+            color: blanchedalmond;
+            position: absolute;
+            transition: 1s;
+        }
+    </style>
+
+</head>
+
+<body>
+<!-- 登录首页 -->
+<header class="header daohanglan">
+    <div class="container">
+        <!-- 导航栏缓慢缩小 小导航栏缩小 下拉导航栏变白-->
+        <div class="row smdaohanglan justify-content-between">
+
+            <a href="/" class="logo"
+               style="color: #74745a;font-weight: 2000;font-size: 20px;letter-spacing: 5px;">三叶☘识青</a>
+            <nav class="nav">
+                <a href="#jieshao">网站介绍</a>
+                <a href="#pricing">页面轮播</a>
+                <a href="#home">我的首页</a>
+                <a href="#courses">图片库</a>
+                <a href="#panel">个人中心</a>
+                <a href="#tools">图像识别</a>
+{#                <a href="#tools">游客界面</a>#}
+                <a href="#shezhi">历史记录</a>
+            </nav>
+            <!-- 小导航栏菜单按钮 -->
+            <div id="menu-btn" class="fas fa-bars"></div>
+        </div>
+    </div>
+</header>
+<!-- 第一页面背景图 -->
+<section class="home" id="jieshao">
+    <!-- 居中 -->
+    <div class="container">
+        <!-- 缓慢缩小 缩小 -->
+        <div class="row smdaohanglan">
+            <div class="col-md-6 login text-center text-md-center"
+                 style="margin-bottom: 80px">
+
+            </div>
+            <div class="col-md-6 text-center text-md-left" style="margin-bottom:290px">
+                <span>网站介绍</span>
+                <h3>请选择登录注册或是游客模式</h3>
+
+                <p></p>
+                <h3>在这里 一起体验</h3>
+
+                <a href="/youke_home" class="link-btn">游客模式</a>
+                <a href="/" class="link-btn-login">前往登录</a>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+<!-- 网站介绍 -->
+<section class="about">
+    <div class="container">
+        <div class="row align-items-center flex-wrap-reverse">
+            <div class="col-md-6">
+                <span>网站介绍</span>
+                <p>
+                    三叶识青，是一款基于flask+bootstrap+jquery的三叶青产地在线识别网站，目前产地暂时共分为五大省份：云南省、广西省、浙江省、贵州省、陕西省。通过识别不同产地的三叶青块根、叶片图片进行分类。
+                </p>
+                   <h2>三叶识青</h2>
+                <p>
+                    下面将介绍网站的主要功能，包括：首页、图片库、个人中心、图像识别、历史记录等。下面的模块将对这些功能页面进行具体介绍！</p>
+                <ul>
+                    <li><i class="far fa-check-square"></i> Web端，&nbsp;&nbsp; @三叶识青</li>
+                    <li><i class="far fa-check-square"></i> 小程序，&nbsp;&nbsp; @三叶识青</li>
+{#                    <li><i class="far fa-check-square"></i> ，&nbsp;&nbsp; @生只灵</li>#}
+                    <p></p>
+                    <li style="color: aqua;"><i class="far fa-check-square" style="color: aquamarine;"></i>
+                        星云文档，分享项目知识&nbsp;&nbsp;  <a style="color: aqua;" href="https://xingyun-dev.github.io/" target="_blank">@星云文档</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <!-- <img src="./images/转天图片包/user-4.png" alt=""> -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- 过渡图 -->
+<section class="counter" style="margin-top: 50px;">
+    <div class="container box-container">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+</section>
+
+
+<!-- 页面轮播 -->
+<section class="pricing" id="pricing" style="margin-top: 100px;">
+    <div class="heading">
+        <span>页面轮播</span>
+        <h3 style="color: aqua;">三叶识青主要功能页面的轮播图展示</h3>
+    </div>
+    <div class="lunbotu">
+        <div class="baodi">
+            <div class="LBT">
+                <div id="slide">
+                    <div class="item" style="background-image: url(/img/img.png);">
+                        <div class="lhx">
+                            <div class="name">三叶识青☘其它</div>
+                            <div class="des" style="font-size: 20px;">IN troduce</div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url(/img/img_home.png);">
+                        <div class="lhx">
+                            <div class="name">三叶识青☘首页</div>
+                            <div class="des" style="font-size: 20px;">Home page</div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url(/img/img_photo.png);">
+                        <div class="lhx">
+                            <div class="name">三叶识青☘图片库</div>
+                            <div class="des" style="font-size: 20px;">Photo Library</div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url(/img/img_person.png);">
+                        <div class="lhx">
+                            <div class="name">三叶识青☘个人中心</div>
+                            <div class="des" style="font-size: 20px;">personal Center</div>
+                        </div>
+                    </div>
+                    <div class="item" style="background-image: url(/img/img_classify.png);">
+                        <div class="lhx">
+                            <div class="name">三叶识青☘图像识别</div>
+                            <div class="des" style="font-size: 20px;">Image Recognition</div>
+                        </div>
+                    </div>
+                     <div class="item" style="background-image: url(/img/img_guanli.png);">
+                        <div class="lhx">
+                            <div class="name">三叶识青☘系统管理</div>
+                            <div class="des" style="font-size: 20px;">System Admin</div>
+                        </div>
+                    </div>
+
+                    <div class="item" style="background-image: url(/img/img_history.png);">
+                        <div class="lhx">
+                            <div class="name">三叶识青☘历史记录</div>
+                            <div class="des" style="font-size: 20px;">History Record</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="buttons">
+                    <div class="s_button">&lt;</div>
+                    <div class="s_button">&gt;</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- 首页 -->
+<section class="about" id="home" style="margin: 100px 0;">
+    <div class="container">
+        <div class="row align-items-center flex-wrap-reverse">
+
+            <div class="col-md-6 flip">
+                <span style="margin-bottom: 3rem">首页</span>
+                <h2 style="margin-bottom: 3rem">三叶识青☘首页</h2>
+                <p>三叶识青☘首页主要是对于每个注册用户的首页，包括了主要功能界面的跳转模块；以及网站中其它用户列表；三叶青图像快速识别。
+                </p>
+
+                <p>同时也是游客模式进入的游客界面</p>
+                <ul>
+                    <li><i class="far fa-check-square"></i>用户列表</li>
+                    <li><i class="far fa-check-square"></i>快速识别 </li>
+                    <li><i class="far fa-check-square"></i>主要功能模块跳转</li>
+                    <p></p>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <img src="/img/img_home.png" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- 星云笔记 -->
+<section class="courses" id="courses">
+    <div class="heading">
+        <span>图片库</span>
+        <h3 style="color: aqua;">存储并展示提交的识别后的三叶青图像</h3>
+    </div>
+    <div class="box-container container">
+        <div class="box">
+            <div class="image">
+                <img src="/img/img_photo.png" alt="">
+            </div>
+            <div class="content">
+                <h3>三叶识青☘图片库</h3>
+                <!--                <a href="" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="/img/img_photo_type.png" alt="">
+            </div>
+            <div class="content">
+                <h3>三叶识青☘图片分类</h3>
+                <!--                <a href="" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+
+        <div class="box">
+            <div class="image">
+                <img src="/img/img_photo_my.png" alt="">
+            </div>
+            <div class="content">
+                <h3>三叶识青☘我的图片</h3>
+                <!--                <a href="" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+
+
+
+    </div>
+</section>
+
+
+<section class="about" id="panel" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row align-items-center flex-wrap-reverse">
+
+            <div class="col-md-6 flip">
+                <span>个人中心</span>
+                <h2>三叶识青☘个人中心</h2>
+                <p>三叶识青☘个人中心主要是对于每个注册的用户在三叶识青中的相关数据的展示,包括用户昵称与头像、注册邮箱、个人简介；另外页展示了我的图片数量以及历史记录
+                </p>
+
+                <p>同时也公开了网站的部分数据信息：图片库总量、用户总量.</p>
+                <ul>
+                    <li><i class="far fa-check-square"></i> 用户信息</li>
+                    <li><i class="far fa-check-square"></i> 网站数据</li>
+                    <li><i class="far fa-check-square"></i>便于用户的操作,提升体验</li>
+                    <p></p>
+                </ul>
+            </div>
+            <div class="col-md-6">
+           <img src="/img/img_person.png" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+
+<p></p>
+<p></p>
+{##}
+{##}
+{#<!-- 交流评论 -->#}
+{#<section class="about" id="communicate" style="margin-top: 100px;">#}
+{#    <div class="container">#}
+{#        <div class="row align-items-center flex-wrap-reverse">#}
+{#            <div class="col-md-6">#}
+{#                <span>图像识别</span>#}
+{#                <h2>三叶识青☘图像识别</h2>#}
+{#                <p>#}
+{#                    星云小窝是自制的一个用于学习交流的网站，该网站秉持共同学习，一起交流的原则，所以特实现此评论区，让各位大佬们能够在这里畅所欲言，分享自己的学习心得，共同进步！#}
+{#                </p>#}
+{#                <p>#}
+{#                    另外，也十分欢迎大家能在评论区提出对本网站的用户体验以及修改意见。你们的每一条宝贵的意见都是对星云小窝的支持。</p>#}
+{#                <ul>#}
+{#                    <li><i class="far fa-check-square"></i>提出修改意见和用户体验</li>#}
+{#                    <li><i class="far fa-check-square"></i> 交流学习问题</li>#}
+{#                    <li><i class="far fa-check-square"></i> 收获更多学习伙伴</li>#}
+{#                </ul>#}
+{#            </div>#}
+{#            <div class="col-md-6">#}
+{#                <!-- <img src="./images/转天图片包/user-4.png" alt=""> -->#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
+
+
+<!-- 图像识别 -->
+<section class="courses" id="tools" style="margin-top: 150px;">
+    <div class="heading">
+        <span>图像识别</span>
+        <h3 style="color: aqua;">专门实现三叶青图像识别，并可提交识别结果</h3>
+    </div>
+    <div class="box-container container">
+        <div class="box">
+            <div class="image">
+                <img src="/img/img_classify.png" alt="">
+            </div>
+            <div class="content">
+                <h3>三叶识青☘在线识别</h3>
+                <!--                <a href="/tools" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="image">
+                <img src="/img/img_classify_pili.png" alt="">
+            </div>
+            <div class="content">
+                <h3>三叶识青☘批量处理</h3>
+                <!--                <a href="/tools/type/2" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+
+        <div class="box">
+            <div class="image">
+                <img src="/img/img_guanli.png" alt="">
+            </div>
+            <div class="content">
+                <h3>三叶识青☘系统管理</h3>
+                <!--                <a href="/tools/type/3" class="link-btn">点击查看</a>-->
+            </div>
+        </div>
+
+
+
+
+    </div>
+</section>
+
+
+<!-- 历史记录-->
+<section class="about" id="shezhi" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row align-items-center flex-wrap-reverse">
+            <div class="col-md-6" style="margin-bottom: 60px">
+                <span style="margin-bottom: 40rem">历史记录</span>
+                <h2>三叶识青☘历史记录</h2>
+                <p>
+                    添加此模块功能是为了对于识别图片的操作进行记录，主要记录操作类别、图像、预测结果、处理时间。
+                </p>
+                <p>
+                    方便用户的查看</p>
+                <ul>
+                    <li><i class="far fa-check-square"></i>识别记录 </li>
+                    <li><i class="far fa-check-square"></i>方便查看</li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+           <img src="/img/img_history.png" alt="">
+
+            </div>
+        </div>
+    </div>
+</section>
+<div style="margin-bottom: 100px"></div>
+
+
+<!--底部-->
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 left">
+                <p>版权所有 &copy; 三叶识青</p>
+                <p>备案号：<a href="https://beian.miit.gov.cn" target="_blank">赣ICP备2024019505号-1</a></p>
+            </div>
+            <div class="col-md-4 center">
+                <p>友情提示</p>
+                <p>本站所有资源均来源于互联网，若有侵权，请联系站长删除;</p>
+            </div>
+            <div class="col-md-4 right">
+                <p>更多关于</p>
+                <a href="https://github.com/xingyun-dev">&nbsp;&nbsp;&nbsp;<img src="/img/logo_github.png"
+                                                                                style="width:30px;height:30px">
+                </a>
+                <a href="https://gitee.com/wht050106">&nbsp;&nbsp;&nbsp;<img src="/img/gitee.png"
+                                                                             style="width:30px;height:30px">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/script.js"></script>
+<script type="text/javascript" src="/js/lbt.js"></script>
+
+</body>
+
+</html>

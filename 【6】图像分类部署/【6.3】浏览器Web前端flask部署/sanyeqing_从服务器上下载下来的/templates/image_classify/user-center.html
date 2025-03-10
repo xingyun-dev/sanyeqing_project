@@ -1,0 +1,286 @@
+{% extends "/image_classify/base.html" %}   {#将当前页面继承至base.html母版#}
+{% block content %}
+<style>
+    @media (max-width: 1000px ){
+        .liulan{
+            display: none;
+        }
+          .pinglun{
+            display: none;
+        }
+            .caozuo{
+            display: none;
+        }
+    }
+</style>
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+
+        <!-- 中部区域布局 -->
+        <div class="container" style="margin-top: 10px;">
+            <div class="row">
+
+                <div class=" col-12" style="padding: 0px 10px">
+                    <div class="col-12 admin-main">
+                        <!--搜索栏-->
+                         <div class="col-12 search-bar row">
+                                <div class="col-6">
+
+                                    <select name="category" id="category" class="form-control" onchange="doSearch()">
+                                        <option selected="selected" disabled>请选择分类</option>
+                                        <option value="all">全部分类</option>
+                                        <option class="level-0" value="11" disabled>块根照片</option>
+                                        <option class="level-1" value="11">&nbsp;&nbsp;&nbsp;云南省&nbsp;&nbsp;(11)
+                                        </option>
+                                        <option class="level-1" value="12">&nbsp;&nbsp;&nbsp;广西省&nbsp;&nbsp;(12)
+                                        </option>
+                                        <option class="level-1" value="13">&nbsp;&nbsp;&nbsp;浙江省&nbsp;&nbsp;(13)
+                                        </option>
+                                        <option class="level-1" value="14">&nbsp;&nbsp;&nbsp;贵州省&nbsp;&nbsp;(14)
+                                        </option>
+                                        <option class="level-1" value="15">&nbsp;&nbsp;&nbsp;陕西省&nbsp;&nbsp;(15)
+                                        </option>
+                                        <option class="level-0" value="21" disabled>叶片照片</option>
+                                        <option class="level-1" value="21">&nbsp;&nbsp;&nbsp;云南省&nbsp;&nbsp;(21)
+                                        </option>
+                                        <option class="level-1" value="22">&nbsp;&nbsp;&nbsp;广西省&nbsp;&nbsp;(22)
+                                        </option>
+                                        <option class="level-1" value="23">&nbsp;&nbsp;&nbsp;浙江省&nbsp;&nbsp;(23)
+                                        </option>
+                                        <option class="level-1" value="24">&nbsp;&nbsp;&nbsp;贵州省&nbsp;&nbsp;(24)
+                                        </option>
+                                        <option class="level-1" value="25">&nbsp;&nbsp;&nbsp;陕西省&nbsp;&nbsp;(25)
+                                        </option>
+
+
+                                        <option class="level-0" value="3">其它&nbsp;&nbsp;(3)</option>
+
+
+                                    </select></div>
+
+
+
+
+
+                            </div>
+
+                        <div class="col-12" style="padding: 10px;">
+                            <table class="table col-12">
+                                <thead style="font-weight: bold">
+                                <tr>
+                                      <td width="7%" align="center">序号</td>
+                                        <td width="32%">文件</td>
+                                        <td width="9%" align="center">类型</td>
+                                        <td width="12%" align="center">用户</td>
+                                        <td width="20%" align="center" class="shanchu">时间</td>
+                                        <td width="20%" align="center" class="shanchu">操作</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {% for photos in result %}
+                                        <tr>
+                                            <td align="center">{{ photos.photos_id }}</td>
+                                            <td>
+                                                <a href="/api/images/{{ photos.photos_name }}.png">
+                                                    {{ photos.photos_name }}
+                                                </a>
+                                            </td>
+                                            {#                                    <td align="center"> <a href="/xingshixiaowo/{{nickname}}/home" >{{nickname}}</a></td>#}
+
+                                            <td align="center">{{ photos.photos_type }}</td>
+                                            <td align="center">{{ find_by_userid(photos.photos_userid|int).nickname }}</td>
+                                            <td align="center" class="shanchu">{{ photos.createtime }}</td>
+
+                                            <td align="center" class="shanchu">
+
+                                                <button class="btn btn-hidden btn-success"
+                                                        data-photosid="{{ photos.photos_id }}">
+
+                                                </button>
+
+
+                                                <button class="btn-delete btn-danger btn"
+                                                        data-photosid="{{ photos.photos_id }}">
+                                                    删除
+                                                </button>
+
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                            </table>
+                        </div>
+
+                         <!-- 分页导航栏 -->
+                        <div class="col-12 paginate">
+                            {% if page==1%}
+                            <!-- 如果是第1页，则上一页也是第1页，否则上一页为当前页-1 -->
+                            <a href="/ucenter/1">上一页</a>&nbsp;&nbsp;
+                            {% else %}
+                            <a href="/ucenter/{{page-1}}">上一页</a>&nbsp;&nbsp;
+                            {% endif %}
+
+                            <!-- 根据总页数循环填充页码，并为其添加超链接进行导航 -->
+                            {% for i in range(total) %}
+                            <a href="/ucenter/{{i+1}}">{{i+1}}</a>&nbsp;&nbsp;
+                            {% endfor %}
+
+                            {% if page==total%}
+                            <!-- 如果是最后一页，则下一页也是最后页，否则下一页为当前页+1 -->
+                            <a href="/ucenter/{{total}}">下一页</a>
+                            {% else %}
+                            <a href="/ucenter/{{page+1}}">下一页</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
+            <script type="text/javascript" src="/js/bootstrap.js"></script>
+            <script type="text/javascript" src="/js/bootbox.min.js"></script>
+    <script type="text/javascript" src="/js/login.js"></script>
+
+        <!-- 对应的switchFavorite函数的代码 -->
+        <script type="text/javascript">
+
+            // 分类搜索
+            function doSearch(event) {
+                if (event != null && event.keyCode !== 13) {
+                    return false;
+                }
+                var category = $.trim($("#category").val());
+                if (category === "all") {  // 当选择项为"全部分类"时
+                    location.href = "/ucenter";  // 跳转到 "/admin" 页面
+                } else {
+                    location.href = "/ucenter/type/" + category + "--1";  // 其他选项跳转到相应的链接地址
+                }
+            }
+
+
+
+//隐藏切换
+                $(function () {
+                    $('.btn-hidden').each(function () {
+                        var photosId = $(this).data('photosid');
+                        var $hideBtn = $(this); // 保存隐藏按钮元素
+
+                        // 检查本地存储中是否有对应文章ID的状态
+                        var isHidden = localStorage.getItem('photos_' + photosId);
+                        if (isHidden === 'true') {
+                            $hideBtn.text('取消隐藏');
+                        } else {
+                            $hideBtn.text('隐藏');
+                        }
+
+                        $hideBtn.click(function () {
+                            bootbox.confirm({
+                                title: "信息提示",
+                                message: "您确定要进行此操作吗？",
+                                buttons: {
+                                    confirm: {
+                                        label: '确认',
+                                        className: 'btn-success'
+                                    },
+                                    cancel: {
+                                        label: '取消',
+                                        className: 'btn-danger'
+                                    }
+                                },
+                                callback: function (result) {
+                                    if (result) {
+                                        $.ajax({
+                                            url: '/photos/hidden',
+                                            type: 'POST',
+                                            data: {photos_id: photosId},
+                                            success: function (data) {
+                                                if (data === 'hidden-success') {
+                                                    // 更新文章状态为已隐藏
+                                                    localStorage.setItem('photos_' + photosId, 'true');
+                                                    // $hideBtn.text('已隐藏');
+                                                    bootbox.alert({
+                                                        title: "隐藏",
+                                                        message: "图片隐藏成功.",
+                                                        callback: function () {
+                                                            location.reload();
+                                                        }
+                                                    }).find('.modal-dialog').addClass('success-dialog');
+                                                } else if (data === "hidden-cancel") {
+                                                    // 更新文章状态为隐藏
+                                                    localStorage.setItem('photos_' + photosId, 'false');
+                                                    // $hideBtn.text('隐藏');
+                                                    bootbox.alert({
+                                                        title: "取消隐藏",
+                                                        message: "图片取消隐藏成功.",
+                                                        callback: function () {
+                                                            location.reload();
+                                                        }
+                                                    }).find('.modal-dialog').addClass('success-dialog');
+                                                }
+                                            },
+                                            error: function (xhr, textStatus, errorThrown) {
+                                                bootbox.alert({title: "错误提示", message: "隐藏失败，请重试！"});
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                        });
+                    });
+                });
+
+
+                //删除文章
+                $(function () {
+                    $('.btn-delete').click(function () {
+                        var photosId = $(this).data('photosid');
+                        bootbox.confirm({
+                            title: "删除照片",
+                            message: "您确定要删除这张照片吗？",
+                            buttons: {
+                                confirm: {
+                                    label: '确认',
+                                    className: 'btn-success'
+                                },
+                                cancel: {
+                                    label: '取消',
+                                    className: 'btn-danger'
+                                }
+                            },
+                            callback: function (result) {
+                                if (result) {
+                                    $.ajax({
+                                        url: '/photos/delete',
+                                        type: 'POST',
+                                        data: {photos_id: photosId},
+                                        success: function (data) {
+                                            if (data === 'delete-success') {
+                                                bootbox.alert({
+                                                    title: "信息提示",
+                                                    message: "照片删除成功.",
+                                                    callback: function () {
+                                                        location.reload();
+                                                    }
+                                                }).find('.modal-dialog').addClass('success-dialog');
+                                            } else {
+                                                bootbox.alert({title: "错误提示", message: "删除失败，请重试！"});
+                                            }
+                                        },
+                                        error: function (xhr, textStatus, errorThrown) {
+                                            bootbox.alert({title: "错误提示", message: "删除失败，请重试！"});
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    });
+                });
+
+
+        </script>
+
+
+    </div>
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
 from sqlalchemy import Table
-from common.database import db
+from common1.database import db
 from app import app
 
 # 创建上下文

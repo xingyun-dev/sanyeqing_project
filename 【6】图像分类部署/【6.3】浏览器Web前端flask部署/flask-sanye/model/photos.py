@@ -1,6 +1,6 @@
 import time
 
-from common.database import db
+from common1.database import db
 from app import app
 from model.users import Users
 

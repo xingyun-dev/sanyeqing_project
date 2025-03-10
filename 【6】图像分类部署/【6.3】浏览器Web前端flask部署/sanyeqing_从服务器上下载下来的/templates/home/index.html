@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>三叶识青☘首页</title>
+    <link rel="icon" href="/img/sanyeqing.ico">
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="/home/css/style.css"/>
+    <link rel="stylesheet" href="/css/mymodal.css">
+    <script type="text/javascript" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script type="text/javascript" src="/js/mymodal.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootbox.min.js"></script>
+</head>
+<body>
+
+
+<!-- Dashboard -->
+<div class="dashboard">
+
+
+    <!-- Dashboard content -->
+    <div class="dashboard-content ">
+        <!-- Topbar -->
+        <div class="topbar flex flex-sb">
+            <div class="search flex">
+                <svg t="1704098742012" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                     xmlns="http://www.w3.org/2000/svg" p-id="28741" width="25" height="25">
+                    <path d="M756.565333 697.258667c2.133333 1.493333 4.224 3.157333 6.101334 5.12l241.664 241.621333c16.256 16.256 16.512 43.52-0.128 60.16a42.453333 42.453333 0 0 1-60.202667 0.170667l-241.664-241.664a41.429333 41.429333 0 0 1-5.034667-6.101334A424.917333 424.917333 0 0 1 426.666667 853.333333C191.018667 853.333333 0 662.314667 0 426.666667S191.018667 0 426.666667 0s426.666667 191.018667 426.666666 426.666667c0 102.698667-36.266667 196.949333-96.768 270.592zM426.666667 768a341.333333 341.333333 0 1 0 0-682.666667 341.333333 341.333333 0 0 0 0 682.666667z"
+                          fill="#3D3D3D" p-id="28742"></path>
+                </svg>
+                <input type="text" class="search blue-input" id="keyuser" placeholder="寻找其他更多小伙伴"
+                       onkeyup="doSearch_byuser(event)">
+                <div id="autocomplete-list"></div>
+            </div>
+
+            <div class="theme flex">
+                <div class="dark flex">
+                    <svg t="1704098874143" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                         xmlns="http://www.w3.org/2000/svg" p-id="29806" width="25" height="25">
+                        <path d="M554.84811 298.412549h-85.226521a21.366313 21.366313 0 0 1 0-42.732626h85.226521a21.366313 21.366313 0 0 1 0 42.732626z"
+                              fill="#F6BB42" p-id="29807"></path>
+                        <path d="M810.527675 724.664522A511.59786 511.59786 0 0 1 331.993886 33.064429 511.35913 511.35913 0 1 0 990.768638 692.316641a509.449292 509.449292 0 0 1-180.240963 32.347881z"
+                              fill="#FFCE54" p-id="29808"></path>
+                        <path d="M554.84811 980.344087a511.35913 511.35913 0 0 1-381.967604-850.832838 511.239765 511.239765 0 1 0 721.441312 721.799407A509.329927 509.329927 0 0 1 554.84811 980.344087z"
+                              fill="#F6BB42" p-id="29809"></path>
+                        <path d="M767.914414 277.284966a21.366313 21.366313 0 1 1-21.366313-21.366313 21.366313 21.366313 0 0 1 21.366313 21.366313z"
+                              fill="#4A89DC" p-id="29810"></path>
+                        <path d="M661.440945 490.35127a21.366313 21.366313 0 1 1-21.366313-21.366313 21.366313 21.366313 0 0 1 21.366313 21.366313z"
+                              fill="#48CFAD" p-id="29811"></path>
+                        <path d="M1023.593979 234.31361a21.366313 21.366313 0 1 1-21.366313-21.246948 21.366313 21.366313 0 0 1 21.366313 21.246948z"
+                              fill="#ED5564" p-id="29812"></path>
+                        <path d="M640.074632 21.247306A21.366313 21.366313 0 1 1 618.827684 0.000358a21.366313 21.366313 0 0 1 21.246948 21.246948z"
+                              fill="#AC92EB" p-id="29813"></path>
+                        <path d="M512.234849 192.058444a21.366313 21.366313 0 0 0-21.246948 21.366313v127.720418a21.366313 21.366313 0 1 0 42.613261 0v-127.720418a21.366313 21.366313 0 0 0-21.366313-21.366313z"
+                              fill="#FFCE54" p-id="29814"></path>
+                        <path d="M874.387884 426.371696a21.366313 21.366313 0 0 0-21.246948 21.366313v127.839783a21.366313 21.366313 0 0 0 42.613261 0V447.738009a21.366313 21.366313 0 0 0-21.366313-21.366313z"
+                              fill="#F6BB42" p-id="29815"></path>
+                        <path d="M917.001145 532.964531H831.774623a21.366313 21.366313 0 0 1 0-42.613261h85.226522a21.366313 21.366313 0 1 1 0 42.613261z"
+                              fill="#FFCE54" p-id="29816"></path>
+                    </svg>
+                </div>
+                <div class="light flex active">
+                    <!--                    <ion-icon name="sunny-outline"></ion-icon>-->
+                    <svg t="1704098962505" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                         xmlns="http://www.w3.org/2000/svg" p-id="30983" width="30" height="30">
+                        <path d="M501.48 493.55m-233.03 0a233.03 233.03 0 1 0 466.06 0 233.03 233.03 0 1 0-466.06 0Z"
+                              fill="#F9C626" p-id="30984"></path>
+                        <path d="M501.52 185.35H478.9c-8.28 0-15-6.72-15-15V87.59c0-8.28 6.72-15 15-15h22.62c8.28 0 15 6.72 15 15v82.76c0 8.28-6.72 15-15 15zM281.37 262.76l-16 16c-5.86 5.86-15.36 5.86-21.21 0l-58.52-58.52c-5.86-5.86-5.86-15.36 0-21.21l16-16c5.86-5.86 15.36-5.86 21.21 0l58.52 58.52c5.86 5.86 5.86 15.35 0 21.21zM185.76 478.48v22.62c0 8.28-6.72 15-15 15H88c-8.28 0-15-6.72-15-15v-22.62c0-8.28 6.72-15 15-15h82.76c8.28 0 15 6.72 15 15zM270.69 698.63l16 16c5.86 5.86 5.86 15.36 0 21.21l-58.52 58.52c-5.86 5.86-15.36 5.86-21.21 0l-16-16c-5.86-5.86-5.86-15.36 0-21.21l58.52-58.52c5.85-5.86 15.35-5.86 21.21 0zM486.41 794.24h22.62c8.28 0 15 6.72 15 15V892c0 8.28-6.72 15-15 15h-22.62c-8.28 0-15-6.72-15-15v-82.76c0-8.28 6.72-15 15-15zM706.56 709.31l16-16c5.86-5.86 15.36-5.86 21.21 0l58.52 58.52c5.86 5.86 5.86 15.36 0 21.21l-16 16c-5.86 5.86-15.36 5.86-21.21 0l-58.52-58.52c-5.86-5.85-5.86-15.35 0-21.21zM802.17 493.59v-22.62c0-8.28 6.72-15 15-15h82.76c8.28 0 15 6.72 15 15v22.62c0 8.28-6.72 15-15 15h-82.76c-8.28 0-15-6.72-15-15zM717.24 273.44l-16-16c-5.86-5.86-5.86-15.36 0-21.21l58.52-58.52c5.86-5.86 15.36-5.86 21.21 0l16 16c5.86 5.86 5.86 15.36 0 21.21l-58.52 58.52c-5.86 5.86-15.35 5.86-21.21 0z"
+                              fill="#F9C626" p-id="30985"></path>
+                    </svg>
+                </div>
+            </div>
+            {% if session.userid == user_id %}
+               
+
+                {# 当前用户正在查看自己的页面 #}
+                <div class="user flex flex-sb" onclick="menuToggle();">
+                    <img src="/chat_room/images/{{ user_ziji.avatar }}" alt=""/>
+                    <p>{{ user_ziji.nickname }}</p>
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                    <div class="menu-user">
+                        <h3>更多用户操作<br>
+                            More interactions
+                        </h3>
+                        <ul>
+                            <li><a href="/person/{{ session.userid }}" target="_blank">个人中心</a></li>
+                            <li class="user_shezhi"><a href="#">用户设置</a></li>
+                            <li><a href="/logout">退出登录</a></li>
+                            <li><a href="https://xingyun-dev.github.io/" target="_blank">星云文档</a></li>
+                        </ul>
+                    </div>
+                </div>
+            {% else %}
+
+
+                <div class="user flex flex-sb" onclick="menuToggle();">
+                    <img src="/chat_room/images/{{ find_by_user_id(user_id).avatar }}" alt=""/>
+                    <p>{{ find_by_user_id(user_id).nickname }}</p>
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                    <div class="menu-user">
+                        <h3>更多用户操作<br>
+                            <spam>More interactions</spam>
+                        </h3>
+                        <ul>
+                            <li><a href="/home/{{ session.userid }}">回到我的首页</a></li>
+                            <li><a href="/logout">退出登录</a></li>
+                            <li><a href="https://xingyun-dev.github.io/" target="_blank">星云文档</a></li>
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+            <!-- End Topbar -->
+        </div>
+
+
+        <!-- 用户模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="myModalLabel">用户设置</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+
+                    </div>
+                    <div class="modal-body">
+                        <form id="settingForm">
+                            <div class="mb-3 row">
+                                <label for="FileUpload1"
+                                       class="col-sm-3 col-form-label">用户头像：</label>
+                                <div class="col-sm-9" style="height: 200px">
+                                    <input class="form-control form-control-sm custom-file-input visually-hidden"
+                                           type="file" id="FileUpload1" name="FileUpload1"
+                                           onchange="previewImage_user(this)">
+                                    <label class="custom-file-label btn " for="FileUpload1"
+                                           style="width: 300px;"></label>
+                                    <img id="imagePreview" class="preview-image ml-3 mt-2"
+                                         alt="请上传用户头像或使用随机默认图片">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="textInput" class="form-label">用户昵称：</label>
+                                <input class="form-control" id="textInput" rows="4"
+                                       placeholder="请输入您的昵称吧！">
+                            </div>
+                            <div class="mb-3">
+                                <label for="textInput" class="form-label texter">自我介绍：</label>
+                                <textarea class="form-control" id="textInput1" rows="4"
+                                          placeholder="请介绍一下你自己吧！不要超过220个字哦！"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">取消
+                        </button>
+                        <button type="button" class="btn btn-primary" onclick="update_usershezhi()">
+                            确定
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            $(function () {
+                $('#myModal').modal('hide')
+            });
+            // 限制输入框字数
+            document.getElementById('textInput1').addEventListener('input', function () {
+                if (this.value.length > 220) {
+                    this.value = this.value.slice(0, 220);
+                }
+            });
+
+            // 图片预览函数
+            function previewImage_user(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#imagePreview').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                } else {
+                    // 如果用户移除已选图片，则恢复到默认图片或提示文字
+                    $('#imagePreview').attr('src', '');
+                }
+            }
+
+
+            $(document).ready(function () {
+                $('.user_shezhi').click(function () {
+                    $('#myModal').modal('show');
+                });
+            });
+        </script>
+
+
+        <!-- section -->
+        <div class="section flex flex-sb">
+            <!-- section left -->
+            <div class="section-left">
+                <!-- banner -->
+                <div class="banner flex flex-sb">
+                    <div class="text">
+                        <h2>
+                            三叶识青✨首页<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </h2>
+                        <a href="/" target="_blank" class="Btn"
+                           style="padding: 10px 20px; background-color: green; color: #fff; text-decoration: none; transition: background-color 0.3s;"
+                           onmouseover="this.style.backgroundColor='rgb(57, 104, 73)'"
+                           onmouseout="this.style.backgroundColor='rgb(57, 104, 73)'"
+                           onmousedown="this.style.backgroundColor='#003d7a'"
+                           onmouseup="this.style.backgroundColor='#0056b3'">回到登录页面</a>
+
+                    </div>
+                    <img src="/home/img/san.png" alt=""
+                         style="mix-blend-mode: multiply; width: 100%; height: 100%; object-fit: contain;padding-left: 70%;"/>
+
+                </div>
+                <div class="nfts">
+                    <div class="trending heading flex flex-sb">
+                        <h2>三叶青图像识别</h2>
+                    </div>
+
+                    <!-- categories -->
+                    <div class="categories flex flex-sb">
+                        <div class="category flex">
+                            <div class="icon">📱</div> <!--win + .-->
+                            <a href="/photo/{{ user_id }}" target="_blank">
+                                图片
+                            </a>
+                        </div>
+
+                        <div class="category flex">
+                            <div class="icon">🕴</div> <!--win + .-->
+                            <a href="/person/{{ user_id }}" target="_blank">
+                                数据
+                            </a>
+                        </div>
+
+                        <div class="category flex">
+                            <div class="icon">️⏰</div> <!--win + .-->
+                            <a href="/history" target="_blank">
+                                记录
+                            </a>
+                        </div>
+
+                        <div class="category flex">
+                            <div class="icon">🔎</div> <!--win + .-->
+                            <a href="/classify" target="_blank">
+                                识别
+                            </a>
+                        </div>
+
+                        <div class="category flex">
+                            <div class="icon">🌐</div> <!--win + .-->
+                            <a href="/qita" target="_blank">
+                                其它
+                            </a>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 10rem">
+                        <div class="border-xiaowo"></div>
+                        <p style="font-size: 3.0rem; text-align: center;align-content: center;color: #fff3cd;">
+                            块根识别</p>
+                        <div style="float:left;">
+                            <a href="javascript:;" class="file" style="background-color: #fff3cd;cursor:pointer;">选择文件
+                                <input type="file" name="file" id="file0"><br>
+                            </a>
+                            <img src="" id="img0" style="margin-top:20px;width: 35rem;height: 30rem;">
+                        </div>
+                        <div class="font_predict" style="float:left;margin-left:5rem;margin-right: 12rem">
+                            <input type="button" id="b0" onclick="test()" value="预测">
+                            <pre id="out" style="width:38rex;height:35rem;line-height: 50px;margin-top:20px;"></pre>
+                        </div>
+                    </div>
+                    <div style="clear:both"></div> <!-- 添加这行来清除浮动 -->
+                    <div style="margin-bottom: 10rem">
+                        <p style="font-size: 3.0rem; text-align:center;align-content:center;color: #fff3cd">
+                            叶片识别</p>
+                        <div class="border-xiaowo"></div>
+
+                        <div style="float:left;">
+                            <a href="javascript:;" class="file" style="background-color: #fff3cd;cursor:pointer;">选择文件
+                                <input type="file" name="file" id="file1"><br>
+                            </a>
+                            <img src="" id="img1" style="margin-top:20px;width: 35rem;height: 30rem;">
+                        </div>
+                        <div class="font_predict" style="float:left;margin-left:5rem;margin-right: 12rem">
+                            <input type="button" id="b0" onclick="test_1()" value="预测">
+                            <pre id="out1" style="width:38rex;height:35rem;line-height: 50px;margin-top:20px;"></pre>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- end section left -->
+
+
+            <!-- section right -->
+
+            <div class="section-right">
+                {% if session.userid == user_id %}
+                    <div class="top-creators">
+                        <div class="heading flex flex sb">
+                            <h2 style="color: orange">网站 管理</h2>
+                        </div>
+                        <div class="border-xiaowo"></div>
+                        <div class="follow-admin flex">
+                            <a href="/home/{{ user_admin.userid }}">
+
+                                <img src="/chat_room/images/{{ user_admin.avatar }}" alt=""/>
+                            </a>
+                            <div class="creator-details" style="padding-top: 18px">
+                                <h3 style="font-weight:1000;">{{ user_admin.nickname }}</h3>
+                                <p>@{{ user_admin.introduce|striptags|truncate(15) }}</p>
+                            </div>
+                        </div>
+                        <div style="justify-content: center;display: flex;align-items: center;">
+                        <a href="/person/{{ user_admin.userid }}" class="btn-xiaowo"
+                           style="background-color: rgb(0, 200, 0);align-items: center;justify-content: center; margin-bottom: 10px">进入他的个人中心</a>
+
+                    </div>
+                    </div>
+                {% else %}
+                    <div class="top-creators">
+                        <div class="heading flex flex sb">
+                            <h2 style="color: orange">用户管理</h2>
+                        </div>
+                        <div class="border-xiaowo"></div>
+                        <div class="follow-admin flex">
+                            <a href="/home/{{ user_at.userid }}">
+                                <img src="/chat_room/images/{{ user_at.avatar }}" alt=""/>
+
+                            </a>
+                            <div class="creator-details" style="padding-top: 18px">
+                                <h3 style="font-weight:1000;">{{ user_at.nickname }}</h3>
+                                <p>@{{ user_at.introduce|striptags|truncate(15) }}</p>
+                            </div>
+                        </div>
+                        <div style="justify-content: center;display: flex;align-items: center;">
+                        <a href="/person/{{ user_at.userid }}" class="btn-xiaowo"
+                           style="background-color: rgb(0, 200, 0);align-items: center;justify-content: center; margin-bottom: 10px">进入他的个人中心</a>
+
+                    </div>
+                    </div>
+                {% endif %}
+
+
+                <div class="top-creators">
+                    <div class="heading flex flex sb">
+                        <h2 style="color: orange">其它用户列表</h2>
+                    </div>
+                    <div class="border-tuijian"></div>
+
+
+                    {% for user in user_all %}
+                        <div class="creator flex flex-sb">
+                            <div class="follow-creators flex">
+                                <a href="/home/{{ user.userid }}" style="color: #837e7e">
+
+                                    <img src="/chat_room/images/{{ user.avatar }}" alt=""/>
+                                </a>
+                                <div class="creator-details" style="padding-top: 15px">
+                                    <h3>{{ user.nickname }}</h3>
+                                    <p>@{{ user.introduce|striptags|truncate(15) }}</p>
+                                </div>
+
+                            </div>
+
+                            <button class=" Btn follow Following btn-follow" id="followBtn"
+                                    style="cursor: pointer">
+
+                                <a href="/person/{{ user.userid }}">GO</a>
+                            </button>
+
+
+                        </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+            <!-- end section right -->
+        </div>
+        <!-- end section -->
+        <!--底部-->
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 left">
+                        <p>版权所有 &copy; 三叶识青</p>
+                        <p>备案号：<a href="https://beian.miit.gov.cn" target="_blank">赣ICP备2024019505号-1</a></p>
+                    </div>
+                    <div class="col-md-4 center">
+                        <p>友情提示</p>
+                        <p>本站所有资源均来源于互联网，若有侵权，请联系站长删除;本站资源,用于学习交流,
+                        </p>
+                    </div>
+                    <div class="col-md-4 right">
+                        <p>更多关于</p>
+                        <a href="https://github.com/xingyun-dev" target="_blank">&nbsp;&nbsp;&nbsp;<img
+                                src="/img/logo_github.png"
+                                style="width:30px;height:30px">
+                        </a>
+                        <a href="https://gitee.com/wht050106" target="_blank">&nbsp;&nbsp;&nbsp;<img
+                                src="/img/gitee.png"
+                                style="width:30px;height:30px">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- End Dashboard content -->
+
+
+
+<!-- End Dashboard -->
+<canvas>
+</canvas>
+<!-- JS -->
+<script src="/home/js/script.js"></script>
+
+
+<script type="text/javascript">
+    $("#file0").change(function () {
+        var objUrl = getObjectURL(this.files[0]);//获取文件信息
+        console.log("objUrl = " + objUrl);
+        if (objUrl) {
+            $("#img0").attr("src", objUrl);
+        }
+    });
+
+    function test() {
+        var fileobj = $("#file0")[0].files[0];
+        console.log(fileobj);
+        var form = new FormData();
+        form.append("file", fileobj);
+        var out = '';
+        var flower = '';
+        $.ajax({
+            type: 'POST',
+            url: "/predict",
+            data: form,
+            async: false,       //同步执行
+            processData: false, // 告诉jquery要传输data对象
+            contentType: false, //告诉jquery不需要增加请求头对于contentType的设置
+            success: function (arg) {
+                out = arg.result;
+
+//                 // 对结果进行排序
+//                 var top1 = out.sort((a, b) => {
+//                     var aConfidence = parseFloat(a.split('置信度:')[1]);  // 提取a的置信度
+//                     var bConfidence = parseFloat(b.split('置信度:')[1]);  // 提取b的置信度
+//                     return bConfidence - aConfidence;
+//                 }).slice(0, 1);
+
+
+// // 存储到历史记录中
+//                 var history = JSON.parse(localStorage.getItem('recognitionHistory')) || [];
+//                 history.push({
+//                     type: '块根识别', // 操作类别
+//                     imageUrl: $("#img0").attr("src"),
+//                     result: top1, // 只存储置信度最高的结果
+//                     time: new Date().toISOString(),
+//                 });
+//                 localStorage.setItem('recognitionHistory', JSON.stringify(history));
+            }, error: function () {
+                console.log("后台处理错误");
+            }
+        });
+
+        out.forEach(e => {
+            flower += `<div style="border-bottom: 1px solid #CCCCCC;line-height: 60px;font-size:16px;">${e}</div>`
+        });
+
+        document.getElementById("out").innerHTML = flower;
+
+    }
+
+    function getObjectURL(file) {
+        var url = null;
+        if (window.createObjectURL != undefined) {
+            url = window.createObjectURL(file);
+        } else if (window.URL != undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file);
+        } else if (window.webkitURL != undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file);
+        }
+        return url;
+    }
+
+    $("#file1").change(function () {
+        var objUrl = getObjectURL(this.files[0]);//获取文件信息
+        console.log("objUrl = " + objUrl);
+        if (objUrl) {
+            $("#img1").attr("src", objUrl);
+        }
+    });
+
+    function test_1() {
+        var fileobj = $("#file1")[0].files[0];
+        console.log(fileobj);
+        var form = new FormData();
+        form.append("file", fileobj);
+        var out = '';
+        var flower = '';
+        $.ajax({
+            type: 'POST',
+            url: "/predict",
+            data: form,
+            async: false,       //同步执行
+            processData: false, // 告诉jquery要传输data对象
+            contentType: false, //告诉jquery不需要增加请求头对于contentType的设置
+            success: function (arg) {
+
+                out = arg.result;
+//                   // 对结果进行排序
+//                 var top1 = out.sort((a, b) => {
+//                     var aConfidence = parseFloat(a.split('置信度:')[1]);  // 提取a的置信度
+//                     var bConfidence = parseFloat(b.split('置信度:')[1]);  // 提取b的置信度
+//                     return bConfidence - aConfidence;
+//                 }).slice(0, 1);
+
+// // 存储到历史记录中
+//                 var history = JSON.parse(localStorage.getItem('recognitionHistory')) || [];
+//                 history.push({
+//                     type: '叶片识别', // 操作类别
+//                     imageUrl: $("#img1").attr("src"),
+//                     result: top1, // 只存储置信度最高的结果
+//                     time: new Date().toISOString(),
+//                 });
+//                 localStorage.setItem('recognitionHistory', JSON.stringify(history));
+            }, error: function () {
+                console.log("后台处理错误");
+            }
+        });
+
+        out.forEach(e => {
+            flower += `<div style="border-bottom: 1px solid #CCCCCC;line-height: 60px;font-size:16px;">${e}</div>`
+        });
+
+        document.getElementById("out1").innerHTML = flower;
+
+    }
+
+</script>
+<style>
+    .file {
+        position: relative;
+        /*display: inline-block;*/
+        background: #CCC;
+        border: 1px solid #CCC;
+        padding: 4px 4px;
+        overflow: hidden;
+        text-decoration: none;
+        text-indent: 0;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 5px;
+        color: #333;
+        font-size: 13px;
+
+    }
+
+    .file input {
+        position: absolute;
+        font-size: 13px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+        border: 1px solid #333;
+        padding: 4px 4px;
+        overflow: hidden;
+        text-indent: 0;
+        width: 100px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 5px;
+        color: #FFFFFF;
+
+    }
+
+    #b0 {
+        background: #1899FF;
+        border: 1px solid #CCC;
+        padding: 4px 10px;
+        overflow: hidden;
+        text-indent: 0;
+        width: 60px;
+        height: 28px;
+        line-height: 20px;
+        border-radius: 5px;
+        color: #FFFFFF;
+        font-size: 13px;
+    }
+
+</style>
+
+<script>
+
+    //更新用户设置
+    function user_update(avatar) {
+        var nickname = $.trim($("#textInput").val());
+        var introduce = $.trim($("#textInput1").val());
+
+        var param = "nickname=" + encodeURIComponent(nickname);
+        param += "&introduce=" + encodeURIComponent(introduce);
+        if (avatar !== null) {
+            param += "&avatar=" + avatar;
+        }
+        $.post('/update_user', param, function (data) {
+            if (data == 'perm-denied') {
+                bootbox.alert({title: "错误提示", message: "权限不足，无法更新"});
+            } else if (data == 'add-fail') {
+                bootbox.alert({title: "错误提示", message: "更新失败，请联系管理员"});
+            } else if (data == 'add-pass') {
+                bootbox.alert({title: "信息提示", message: "用户更新成功！"});
+                setTimeout(function () {
+                    location.href = '/home/{{session.get("userid")}}';
+                }, 1000);
+            } else {
+                bootbox.alert({title: "错误提示", message: "更新失败,可能出现错误."});
+
+            }
+        }).fail(function () {
+            // 处理AJAX请求失败的情况
+            console.error('AJAX request failed');
+        });
+    }
+
+
+    //显示更多用户操作的下拉菜单
+    function menuToggle() {
+        const toggleMenu = document.querySelector(".menu-user")
+        toggleMenu.classList.toggle('active')
+    }
+
+    //搜索用户
+    function doSearch_byuser(event) {
+        if (event != null && event.keyCode != 13) {
+            return false;
+        }
+
+        var keyword = $.trim($("#keyuser").val());
+        if (keyword.length == 0 || keyword.length > 20 || keyword.indexOf('%') >= 0) {
+            bootbox.alert({"title": "错误提示！", "message": "您输入的查询名字不规范."})
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/home/search",
+            data: {keyword: keyword},
+            success: function (response) {
+                if (response.success) {
+                    var userId = response.result.userid;
+                    location.href = "/home/" + userId;
+                } else {
+
+                    bootbox.alert({"title": "错误提示！", "message": "您输入的查询名字未找到"})
+                }
+            },
+            error: function () {
+                bootbox.alert({"title": "错误提示！", "message": "您输入的查询名字未找到"})
+            }
+        });
+
+    }
+
+    var arr = []; // 全局变量，存储用户昵称数据
+
+    $.ajax({
+        type: "GET",
+        url: "/home/nickname",
+        success: function (response) {
+            arr = response.nickname;
+
+        },
+        error: function () {
+            bootbox.alert({"title": "错误提示！", "message": "获取用户昵称数据失败."})
+
+            // alert("获取用户昵称数据失败");
+        }
+    });
+
+
+    var search = document.getElementsByClassName("blue-input")[0];
+    var autocompleteList = document.getElementById("autocomplete-list");
+
+    function showList() {
+        autocompleteList.innerHTML = ""; // 清空之前的搜索结果
+
+        var res = searchByIndexOf(search.value, arr);
+
+        // 如果搜索结果大于6个，随机选择6个
+        if (res.length > 6) {
+            res = res.slice(0, 6); // 取前6个结果
+        }
+
+        for (var i = 0; i < res.length; i++) {
+            createLinkElement(res[i]);
+        }
+    }
+
+    function createLinkElement(keyword) {
+        var li = document.createElement("li");
+        var link = document.createElement("a");
+        link.innerText = keyword; // 设置链接文本
+
+        $.ajax({
+            type: "POST",
+            url: "/home/search",
+            data: {keyword: keyword},
+            success: function (response) {
+                if (response.success) {
+                    var userId = response.result.userid;
+                    var href = "/home/" + userId;
+                    link.setAttribute("href", href); // 设置链接地址
+
+                } else {
+                    bootbox.alert({"title": "错误提示！", "message": "您输入的查询名字未找到."})
+                }
+            },
+            error: function () {
+                bootbox.alert({"title": "错误提示！", "message": "您输入的查询名字未找到."})
+            }
+        });
+
+        // 点击链接时跳转，并清空自动补全列表
+        link.addEventListener("click", function (event) {
+            event.preventDefault(); // 阻止默认链接跳转行为
+            search.value = this.innerText;
+            autocompleteList.innerHTML = "";
+            window.location.href = this.getAttribute("href");
+        });
+
+        li.appendChild(link);
+        autocompleteList.appendChild(li);
+    }
+
+
+    search.oninput = function getMoreContents() {
+        showList();
+    }
+    //
+    search.onfocus = function () {
+        showList();
+    }
+
+
+    function searchByIndexOf(keyWord, list) {
+        if (!(list instanceof Array)) {
+            return [];
+        }
+        if (keyWord === "") {
+            return [];
+        } else {
+            var len = list.length;
+            var arr = [];
+            for (var i = 0; i < len; i++) {
+                if (list[i].indexOf(keyWord) >= 0) {
+                    arr.push(list[i]);
+                }
+            }
+            return arr;
+        }
+    }
+
+
+    function openSettingWindow() {
+        var modal = document.getElementById("settingModal");
+        modal.style.display = "block";
+    }
+
+    function closeSettingWindow() {
+        var modal = document.getElementById("settingModal");
+        modal.style.display = "none";
+    }
+
+    function updateContent() {
+        var imageInput = document.getElementById("imageInput").value;
+        var textInput = document.getElementById("textInput").value;
+        var linkInput = document.getElementById("linkInput").value;
+
+        document.querySelector('.nft img').src = imageInput;
+        document.querySelector('.nft .title').innerText = textInput;
+        document.querySelector('.nft .price a').href = linkInput;
+
+        closeSettingWindow(); // 关闭设置窗口
+    }
+</script>
+
+</body>
+
+</html>

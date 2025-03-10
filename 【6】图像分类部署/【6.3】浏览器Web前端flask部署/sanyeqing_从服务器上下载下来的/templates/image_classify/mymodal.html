@@ -1,0 +1,172 @@
+<link rel="stylesheet" href="/css/mymodal.css">
+<script type="text/javascript" src="/js/mymodal.js"></script>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">块根图片提交</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+            <div class="modal-body">
+                <form id="settingForm">
+                    <div class="mb-3 row">
+                        <label for="FileUpload1" class="col-sm-3 col-form-label">预测结果：</label>
+                        <div class="col-sm-9" style="height: 50px">
+                            <p id="predictionResult"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="textInput"
+                               class="form-label">修改内容（如果不填写，则提交默认结果）：</label>
+                        <textarea class="form-control" id="textInput" rows="4"
+                                  placeholder="如果预测结果与已知结果不符，可以在这里写下修改后的结果类别"></textarea>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="submit_photos()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal_ye" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">叶片图片提交</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+            <div class="modal-body">
+                <form id="settingForm">
+                    <div class="mb-3 row">
+                        <label for="FileUpload1" class="col-sm-3 col-form-label">预测结果：</label>
+                        <div class="col-sm-9" style="height: 50px">
+                            <p id="predictionResult_ye"></p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="textInput"
+                               class="form-label">修改内容（如果不填写，则提交默认结果）：</label>
+                        <textarea class="form-control" id="textInput_ye" rows="4"
+                                  placeholder="如果预测结果与已知结果不符，可以在这里写下修改后的结果类别"></textarea>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" onclick="submit_photos_ye()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('#myModal').modal('hide')
+    });
+
+
+    //提交图片设置
+    function submitphotos_add(photos_name) {
+        // 创建一个对象来存储predict和photos_type的对应关系
+        var typeMap = {
+            '云南省': '11',
+            '广西省': '12',
+            '贵州省': '14',
+            '浙江省': '13',
+            '陕西省': '15',
+        };
+
+
+        var predict = $('#predictionResult').text();
+        var xiugai_predict = $.trim($("#textInput").val())
+        // 如果修改框的值为空，则使用最大置信度对应的类别
+        var finalCategory = predict ? predict : xiugai_predict;
+        var photos_type = typeMap[finalCategory] || '3';
+        var param = "&photos_type=" + encodeURIComponent(photos_type);
+        param += "&photos_name=" + photos_name; // 添加图片
+        param += "&predict=" + (xiugai_predict ? xiugai_predict : predict);
+
+        $.post('/insert_photos', param, function (data) {
+            if (data == 'perm-denied') {
+                bootbox.alert({title: "错误提示", message: "还未登录，无法提交"});
+                {#alert('权限不足，无法提交')#}
+            } else if (data == 'add-fail') {
+                bootbox.alert({title: "错误提示", message: "提交失败，请联系管理员"});
+                {#alert('提交失败，请联系管理员')#}
+            } else if (data == 'add-pass') {
+                bootbox.alert({title: "信息提示", message: "提交成功！"});
+                {#alert('提交成功！等待管理员审核！')#}
+                setTimeout(function () {
+                    location.href = '/classify';
+                }, 1000);
+            } else {
+                bootbox.alert({title: "错误提示", message: "提交失败,可能出现错误."});
+                {#alert('提交失败,可能出现错误.')#}
+
+            }
+        }).fail(function () {
+            // 处理AJAX请求失败的情况
+            alert('ajax请求失败')
+            console.error('AJAX request failed');
+        });
+    }
+
+    //提交图片设置
+    function submitphotos_add_ye(photos_name) {
+        // 创建一个对象来存储predict和photos_type的对应关系
+        var typeMap = {
+            '云南省': '21',
+            '广西省': '22',
+            '贵州省': '24',
+            '浙江省': '23',
+            '陕西省': '25',
+        };
+
+
+        var predict = $('#predictionResult_ye').text();
+        var xiugai_predict = $.trim($("#textInput_ye").val())
+        // 如果修改框的值为空，则使用最大置信度对应的类别
+        var finalCategory = xiugai_predict ? xiugai_predict : predict;
+        var photos_type = typeMap[finalCategory] || '3';
+        var param = "&photos_type=" + encodeURIComponent(photos_type);
+        param += "&photos_name=" + photos_name; // 添加图片
+        param += "&predict=" + finalCategory;
+
+        $.post('/insert_photos', param, function (data) {
+            if (data == 'perm-denied') {
+                bootbox.alert({title: "错误提示", message: "还未登录，无法提交"});
+                {#alert('权限不足，无法提交')#}
+            } else if (data == 'add-fail') {
+                bootbox.alert({title: "错误提示", message: "提交失败，请联系管理员"});
+                {#alert('提交失败，请联系管理员')#}
+            } else if (data == 'add-pass') {
+                bootbox.alert({title: "信息提示", message: "提交成功！"});
+                {#alert('提交成功！等待管理员审核！')#}
+                setTimeout(function () {
+                    location.href = '/classify';
+                }, 1000);
+            } else {
+                bootbox.alert({title: "错误提示", message: "提交失败,可能出现错误."});
+                {#alert('提交失败,可能出现错误.')#}
+
+            }
+        }).fail(function () {
+            // 处理AJAX请求失败的情况
+            alert('ajax请求失败')
+            console.error('AJAX request failed');
+        });
+    }
+
+</script>

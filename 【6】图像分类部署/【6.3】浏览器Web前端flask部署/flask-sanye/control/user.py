@@ -2,13 +2,13 @@ import hashlib
 import os
 import re
 from flask import Blueprint, make_response, session, request, jsonify
-from common.utility import imagecode, gen_email_code, send_email
+from common1.utility import imagecode, gen_email_code, send_email
 from model.users import Users
 from model.ecode import Ecode
 
 user = Blueprint('user', __name__)
 
-font_dir = 'common'  # 字体文件所在的目录
+font_dir = 'common1'  # 字体文件所在的目录
 font_filename = 'Arial.ttf'  # 字体文件名
 font_path = os.path.join(font_dir, font_filename)  # 构建完整路径
 

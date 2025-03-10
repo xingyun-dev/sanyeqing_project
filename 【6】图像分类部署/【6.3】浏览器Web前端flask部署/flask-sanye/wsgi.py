@@ -4,9 +4,12 @@ from app import app
 
 
 @app.route('/api/images')
-def get_images():
+def get_images1():
+    # 获取当前应用的根路径
     image_folder = os.path.join(app.root_path, 'static/sanyeqing_uploads')
+    # 列出指定文件夹中的所有文件和目录
     images = os.listdir(image_folder)
+    # 将列表转换为JSON格式并返回
     return jsonify(images)
 
 
@@ -21,7 +24,7 @@ def get_images_my():
 
 
 @app.route('/api/images/<filename>')
-def get_image(filename):
+def get_image1(filename):
     image_folder = os.path.join(app.root_path, 'static/sanyeqing_uploads')
     return send_from_directory(image_folder, filename)
 

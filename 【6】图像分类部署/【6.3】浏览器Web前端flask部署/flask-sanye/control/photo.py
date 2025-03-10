@@ -5,7 +5,7 @@ import time
 
 from PIL import Image
 from flask import Blueprint ,session, request
-from common.utility import compress_image
+from common1.utility import compress_image
 
 from model.users import Users
 from model.photos import Photos
@@ -30,7 +30,7 @@ def get_photos_by_majortype(majortype):
 
 
 # 根据photos_type命名对应的分类信息
-from common.utility import ming_photos_by_type
+from common1.utility import ming_photos_by_type
 
 
 # 图片库

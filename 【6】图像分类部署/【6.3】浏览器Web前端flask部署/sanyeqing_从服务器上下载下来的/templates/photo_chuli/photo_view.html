@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="io-white-mode" version="4">
+<head>
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    {% if user_one %}
+        <title>三叶识青☘{{ user_one.nickname }}的图片库</title>
+    {% else %}
+
+        <title>三叶识青☘图片库</title>
+    {% endif %}
+
+    <link rel="icon" href="/img/sanyeqing.ico">
+    <meta name="robots" content="max-image-preview:large">
+    <style id="classic-theme-styles-inline-css" type="text/css">
+        /*! This file is auto-generated */
+        .wp-block-button__link {
+            color: #fff;
+            background-color: #32373c;
+            border-radius: 9999px;
+            box-shadow: none;
+            text-decoration: none;
+            padding: calc(.667em + 2px) calc(1.333em + 2px);
+            font-size: 1.125em
+        }
+
+        .wp-block-file__button {
+            background: #32373c;
+            color: #fff;
+            text-decoration: none
+        }
+    </style>
+    <script type="text/javascript" src="/imageclassfiy/jquery.min.js"
+            id="jquery-js"></script>
+    <link rel="stylesheet" id="iconfont-css"
+          href="/imageclassfiy/iconfont.css" type="text/css"
+          media="all">
+    <link rel="stylesheet" id="iconfont-io-1-css" href="/imageclassfiy/font_1620678_18rbnd2homc.css" type="text/css"
+          media="all">
+    <link rel="stylesheet" id="iconfont-io-2-css" href="/imageclassfiy/font_2811503_rz4zraeosal.css" type="text/css"
+          media="all">
+    <link rel="stylesheet" id="bootstrap-css"
+          href="/imageclassfiy/bootstrap.min.css" type="text/css"
+          media="all">
+    <link rel="stylesheet" id="style-css"
+          href="/imageclassfiy/style.min.css" type="text/css"
+          media="all">
+    <link rel="stylesheet" id="QAPress-css"
+          href="/imageclassfiy/style.css" type="text/css" media="all">
+    {#     <link rel="stylesheet" type="text/css" href="/css/photo.css">#}
+    {#    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css">#}
+    <link rel="stylesheet" type="text/css" href="/css/chromagallery.css">
+    <style id="QAPress-inline-css" type="text/css">
+        :root {
+            --qa-color: #1471CA;
+            --qa-hover: #0D62B3;
+        }
+    </style>
+    <script>
+        function loadFunc(func) {
+            if (document.all) {
+                window.attachEvent("onload", func);
+            } else {
+                window.addEventListener("load", func, false);
+            }
+        } </script>
+
+    <script id="wpcp_disable_selection"
+            type="text/javascript">//<![CDATA[var image_save_msg='You Can Not Save images!'; var no_menu_msg='Context Menu disabled!'; var smessage = "Content is protected !!";function disableEnterKey(e){ var elemtype = e.target.tagName; elemtype = elemtype.toUpperCase(); if (elemtype == "TEXT" || elemtype == "TEXTAREA" || elemtype == "INPUT" || elemtype == "PASSWORD" || elemtype == "SELECT" || elemtype == "OPTION" || elemtype == "EMBED") { elemtype = 'TEXT'; } if (e.ctrlKey){ var key; if(window.event) key = window.event.keyCode; //IE else key = e.which; //firefox (97) //if (key != 17) alert(key); if (elemtype!= 'TEXT' && (key == 97 || key == 65 || key == 67 || key == 99 || key == 88 || key == 120 || key == 26 || key == 85 || key == 86 || key == 83 || key == 43)) { show_wpcp_message('啦啦啦'); return false; }else return true; }}//////////////////////////////////////////////////////////////////////////////////////function disable_copy(e){ var elemtype = e.target.tagName; elemtype = elemtype.toUpperCase(); if (elemtype == "TEXT" || elemtype == "TEXTAREA" || elemtype == "INPUT" || elemtype == "PASSWORD" || elemtype == "SELECT" || elemtype == "OPTION" || elemtype == "EMBED") { elemtype = 'TEXT'; } var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor); var checker_IMG = ''; if (elemtype == "IMG" && checker_IMG == 'checked' && e.detail >= 2) {show_wpcp_message(alertMsg_IMG);return false;} if (elemtype != "TEXT") { if (smessage !== "" && e.detail == 2) show_wpcp_message(smessage); if (isSafari) return true; else return false; } }//////////////////////////////////////////////////////////////////////////////////////function disable_copy_ie(){ var elemtype = window.event.srcElement.nodeName; elemtype = elemtype.toUpperCase(); if (elemtype == "IMG") {show_wpcp_message(alertMsg_IMG);return false;} if (elemtype != "TEXT" && elemtype != "TEXTAREA" && elemtype != "INPUT" && elemtype != "PASSWORD" && elemtype != "SELECT" && elemtype != "OPTION" && elemtype != "EMBED") { return false; }} function reEnable(){ return true;}document.onkeydown = disableEnterKey;document.onselectstart = disable_copy_ie;if(navigator.userAgent.indexOf('MSIE')==-1){ document.onmousedown = disable_copy; document.onclick = reEnable;}function disableSelection(target){ //For IE This code will work if (typeof target.onselectstart!="undefined") target.onselectstart = disable_copy_ie; //For Firefox This code will work else if (typeof target.style.MozUserSelect!="undefined") {target.style.MozUserSelect="none";} //All other (ie: Opera) This code will work else target.onmousedown=function(){return false} target.style.cursor = "default";}//Calling the JS function directly just after body loadwindow.onload = function(){disableSelection(document.body);};//]]></script>
+    <script id="wpcp_disable_Right_Click"
+            type="text/javascript"> //<![CDATA[ document.ondragstart = function() { return false;} /* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Disable context menu on images by GreenLava Version 1.0 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ */ function nocontext(e) { return false; } document.oncontextmenu = nocontext; //]]> </script>
+    <style>
+        .unselectable {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            cursor: default;
+        }
+
+        html {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+    </style>
+    <script id="wpcp_css_disable_selection"
+            type="text/javascript">var e = document.getElementsByTagName('body')[0];
+    if (e) {
+        e.setAttribute('unselectable', on);
+    }</script>
+    <style>
+        .io.icon-fw,
+        .iconfont.icon-fw {
+            width: 1.15em;
+        }
+
+        .screenshot-carousel .img_wrapper a {
+            display: contents
+        }
+
+        .fancybox-slide--iframe .fancybox-content {
+            max-width: 1280px;
+            margin: 0
+        }
+
+        .fancybox-slide--iframe.fancybox-slide {
+            padding: 44px 0
+        }
+
+        .navbar-nav .menu-item-286 a {
+            background: #ff8116;
+            border-radius: 50px !important;
+            padding: 5px 10px !important;
+            margin: 5px 0 !important;
+            color: #fff !important;
+        }
+
+        .navbar-nav .menu-item-286 a i {
+            position: absolute;
+            top: 0;
+            right: -10px;
+            color: #f13522;
+        }
+
+        .io-black-mode .navbar-nav .menu-item-286 a {
+            background: #ce9412;
+        }
+
+        .io-black-mode .navbar-nav .menu-item-286 a i {
+            color: #fff;
+        }
+
+        .customize-width {
+            max-width: 1900px
+        }
+
+        .sidebar-nav {
+            width: 210px
+        }
+
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 210px;
+            }
+
+            .main-content .page-header {
+                left: 210px;
+            }
+        }
+    </style>
+
+
+</head>
+
+<body
+        class="page-template page-template-template-contribute page-template-template-contribute-php page page-id-236 sidebar_right unselectable mini-sidebar">
+
+{% if user_one %}
+    {% include '/photo_chuli/sidebar_user.html' %}
+
+{% else %}
+    {% include '/photo_chuli/sidebar.html' %}
+
+{% endif %}
+
+{#<div id="content" class="container col-11">#}
+
+<div class="panel card">
+    <div class="card-body">
+        <div class="panel-body single mt-2">
+            {% if user_one %}
+                <h5><span style="color: #ff0000;">{{ user_one.nickname }}的图片库</span></h5>
+                <p>用于展示用户提交的三叶青图片;<br>感谢提交的图片,多谢您的支持!</p>
+            {% else %}
+
+                <h5><span style="color: #ff0000;">三叶青图片库</span></h5>
+                <p>用于展示收集到的三叶青块根、叶片以及其它等图片;<br>
+                    每次刷新页面从后台随机抽取照片</p>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+<div class="content" style="margin: 10px">
+    <div class="chroma-gallery mygallery">
+        {% if user_one %}
+            {% for photos in user_all_photos %}
+
+                <img src="/sanyeqing_uploads/{{ photos.photos_name }}.png"
+                     alt="{{ photos.photos_name | first_part }}&nbsp;&nbsp;{{ photos.createtime |format_date('%Y-%m') }}"
+                     data-largesrc="/sanyeqing_uploads/{{ photos.photos_name }}.png">
+
+            {% endfor %}
+
+        {% else %}
+            {% for photos in all_photos %}
+
+                <img src="/sanyeqing_uploads/{{ photos.photos_name }}.png"
+                     alt="{{ photos.photos_name | first_part }}&nbsp;&nbsp;{{ photos.createtime |format_date('%Y-%m') }}"
+                     data-largesrc="/sanyeqing_uploads/{{ photos.photos_name }}.png">
+
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script src="/js/modernizr-chrg.min.js"></script>
+<script src="/js/chromagallery.js"></script>
+<script src="/js/masonry.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.js"></script>
+<script type="text/javascript" src="/js/bootbox.min.js"></script>
+<script type="text/javascript" src="/js/login.js"></script>
+<script type="text/javascript">
+    $(".mygallery").chromaGallery
+    ({
+        {#color:'#000',#}
+        {#gridMargin: 10,#}
+        maxColumns: 8,
+        dof: true,
+        {#screenOpacity:0.8#}
+    });
+</script>
+
+
+<footer>
+    <div id="footer-tools" class="d-flex flex-column">
+        <a href="javascript:" id="go-to-up" class="btn rounded-circle go-up m-1" rel="go-top"
+           style="display: inline;"> 🚀 </a>
+
+        <a href="javascript:" id="switch-mode" class="btn rounded-circle switch-dark-mode m-1"
+           data-toggle="tooltip" data-placement="left" title="" data-original-title="夜间模式">❄
+        </a>
+
+    </div>
+</footer>
+
+
+<script type="text/javascript"
+        src="/imageclassfiy/popper.min.js" id="popper-js"></script>
+<script type="text/javascript"
+        src="/imageclassfiy/bootstrap.min.js"
+        id="bootstrap-js"></script>
+<script type="text/javascript"
+        src="/imageclassfiy/theia-sticky-sidebar.js"
+        id="sidebar-js"></script>
+<script type="text/javascript"
+        src="/imageclassfiy/lazyload.min.js"
+        id="lazyload-js"></script>
+<script type="text/javascript"
+        id="appjs-js-extra">
+
+    var theme = {
+        "ajaxurl": "https:\/\/www.aizhinan.cn\/wp-admin\/admin-ajax.php",
+        "uri": "https:\/\/www.aizhinan.cn\/wp-content\/themes\/onenav",
+        "loginurl": "https:\/\/www.aizhinan.cn\/login\/?redirect_to=https:\/\/www.aizhinan.cn\/contribute",
+        "sitesName": "AI\u6307\u5357\u5b98\u7f51",
+        "addico": "https:\/\/www.aizhinan.cn\/wp-content\/themes\/onenav\/images\/add.png",
+        "order": "asc",
+        "formpostion": "top",
+        "defaultclass": "io-white-mode",
+        "isCustomize": "0",
+        "icourl": "https:\/\/api.iowen.cn\/favicon\/",
+        "icopng": ".png",
+        "urlformat": "1",
+        "customizemax": "10",
+        "newWindow": "0",
+        "lazyload": "1",
+        "minNav": "0",
+        "loading": "0",
+        "hotWords": "baidu",
+        "classColumns": " col-2a col-sm-2a col-md-2a col-lg-3a col-xl-5a col-xxl-6a ",
+        "apikey": "TWpBeU1USTJNemd4TWpZM0d6RS9oY2tWdVZYWTVNR2hJU0Zkd2FIZHVOR2xKVjJoVGIwMU5iM0JIZVV4RA==",
+        "isHome": "",
+        "version": "4.1031"
+    };
+
+    var localize = {};
+</script>
+<script type="text/javascript" src="/imageclassfiy/app.min.js"
+        id="appjs-js"></script>
+
+<script type="text/javascript"
+        src="/imageclassfiy/postviews-cache.js"
+        id="wp-postviews-cache-js"></script>
+<script type="text/javascript" src="/imageclassfiy/scripts.js"
+        id="QAPress-js-js"></script>
+<script type="text/javascript"
+        src="/imageclassfiy/icons-2.7.7.js"
+        id="wpcom-icons-js"></script>
+<script type="text/javascript" src="/imageclassfiy/new-post.js"
+        id="new-post-js"></script>
+
+{#</div>#}
+
+</body>
+
+</html>

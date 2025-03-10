@@ -1,7 +1,7 @@
 import random
 import time
 from sqlalchemy import Table, func
-from common.database import db
+from common1.database import db
 from app import app
 
 # 创建上下文

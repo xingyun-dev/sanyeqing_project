@@ -4,15 +4,15 @@ from PIL import Image
 from flask_jwt_extended import create_access_token, JWTManager
 from pytorch_model.image_classifier import get_imgGeneral
 from pytorch_model.AipImageClassify import get_prediction
-from common.md5random import sjs
+from common1.md5random import sjs
 from flask import Flask, jsonify, request, render_template, send_from_directory, session
 from flask_cors import CORS
-from common.database import init_db
+from common1.database import init_db
 
 app = Flask(__name__, static_url_path="/", static_folder="static", template_folder="templates")
 CORS(app)  # 解决跨域问题
 app.config['SECRET_KEY'] = os.urandom(24)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:wht050106@localhost:3306/sanyeqing_flask?charset=utf8'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:wht050106@localhost:3306/sanye_qing?charset=utf8'
 UPLOAD_FOLDER = './static/sanyeqing_uploads/'  # 替换为实际路径
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Set the secret key for JWTs

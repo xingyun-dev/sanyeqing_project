@@ -1,0 +1,12 @@
+{% extends "/image_classify/base.html" %}
+{% block content %}
+<div class="col-10" style="margin: auto">
+<img src="/img/500.jpg" class="img-fluid"/>
+</div>
+
+<script>
+    setTimeout(function (){
+        location.href = '/classify';
+    },2000)
+</script>
+{% endblock %}

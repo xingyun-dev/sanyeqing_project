@@ -13,7 +13,6 @@ app = Flask(__name__, static_url_path="/", static_folder="static", template_fold
 CORS(app)  # 解决跨域问题
 app.config['SECRET_KEY'] = os.urandom(24)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:wht050106@localhost:3306/sanye_qing?charset=utf8'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://flask-xingyun:66EiBifjk4bdASJF@150.158.40.104:3306/sanye_qing?charset=utf8mb4'
 UPLOAD_FOLDER = './static/sanyeqing_uploads/'  # 替换为实际路径
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Set the secret key for JWTs

@@ -15,7 +15,6 @@ app = Flask(__name__, static_url_path="/", static_folder="static", template_fold
 CORS(app)  # 解决跨域问题
 app.config['SECRET_KEY'] = '3jhbhjhkhkhj60gjgjhg3hjkkhfhygyhgyjgytyrt'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:wht050106@localhost:3306/sanye_qing?charset=utf8'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://flask-xingyun:fAfHjZFamtjNayjs@150.158.40.104:3306/sanye_qing?charset=utf8mb4'
 app.config['PREFERRED_URL_SCHEME'] = 'https'
 UPLOAD_FOLDER = './static/sanyeqing_uploads/'  # 替换为实际路径
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
